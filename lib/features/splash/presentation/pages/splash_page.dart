@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/theme/app_colors.dart';
+import 'package:smart_class/core/theme/app_text_styles.dart';
+import 'package:smart_class/core/theme/app_theme_extensions.dart';
+import 'package:smart_class/core/utils/constants.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -7,9 +11,75 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends State<SplashPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> logoScale;
+  late Animation<double> textOpacity;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+
+    logoScale = Tween<double>(begin: 0.5, end: 1).animate(
+      CurvedAnimation(parent: controller, curve: Curves.easeOutBack),
+    );
+
+    textOpacity = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: controller, curve: Curves.easeIn),
+    );
+
+    controller.forward();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final t = Theme.of(context).extension<AppThemeColors>()!;
+
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: AppColors.gradientPrimary,
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ScaleTransition(
+                scale: logoScale,
+                child: Image.asset(
+                  Constants.logo,
+                  scale: 5,
+                ),
+              ),
+              const SizedBox(height: 20),
+              FadeTransition(
+                opacity: textOpacity,
+                child: Text("EduConnect", 
+                style: AppTypography.displayLarge.copyWith(
+                  color: t.textInverse
+                )
+                ,)
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
