@@ -4,6 +4,9 @@ import 'package:smart_class/core/theme/app_text_styles.dart';
 import 'package:smart_class/core/theme/app_theme_extensions.dart';
 import 'package:smart_class/core/utils/constants.dart';
 
+import '../../../../core/routing/routes.dart';
+import '../../../../core/utils/extensions.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -37,7 +40,9 @@ class _SplashPageState extends State<SplashPage>
     controller.forward();
 
     Future.delayed(const Duration(seconds: 3), () {
-      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
+      if(mounted) {
+        context.pushReplacementNamed(Routes.onboardingPage);
+      }
     });
   }
 

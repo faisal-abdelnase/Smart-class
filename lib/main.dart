@@ -19,7 +19,8 @@ class _SmartClassState extends State<SmartClass> {
   Widget build(BuildContext context) {
 
     ThemeMode _themeMode = ThemeMode.system;
-      void _toggleTheme() => setState(() {
+      // ignore: unused_element
+      void toggleTheme() => setState(() {
         _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
       });
     return MaterialApp(

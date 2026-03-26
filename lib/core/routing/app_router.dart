@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_class/core/routing/routes.dart';
-import 'package:smart_class/features/splash/presentation/pages/splash_page.dart';
+import 'routes.dart';
+import '../../features/splash/presentation/pages/splash_page.dart';
+
+import '../../features/onboarding/presentation/pages/onboarding_page.dart';
 
 class AppRouter {
 
@@ -12,6 +14,9 @@ class AppRouter {
 
       case Routes.splashPage:
         return MaterialPageRoute(builder: (_)=> SplashPage());
+
+      case Routes.onboardingPage:
+          return MaterialPageRoute(builder: (_)=> OnboardingPage());
 
       default:
         return null;
