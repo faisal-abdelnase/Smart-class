@@ -1,111 +1,128 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/di/service_locator.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../data/datasources/onboarding_local_data.dart';
+import '../cubit/onboarding_cubit.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
 
-class OnboardingPage extends StatefulWidget {
+class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
-
-  @override
-  State<OnboardingPage> createState() => _OnboardingPageState();
-}
-
-class _OnboardingPageState extends State<OnboardingPage> {
-  final PageController controller = PageController();
-  int index = 0;
 
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).extension<AppThemeColors>()!;
+    final pages = OnboardingData.pages;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: TextButton(
-                onPressed: () {
-                  // go to login
-                },
-                child: Text("Skip"),
-              ),
-            ),
+    return BlocProvider(
+      create: (context) => sl<OnboardingCubit>(),
+      child: Scaffold(
+        body: SafeArea(
+          child: BlocListener<OnboardingCubit, OnboardingState>(
+            listener: (context, state) {
+              if (state.isDone) {
+                context.pushReplacementNamed(Routes.loginPage);
+              }
+            },
+            child: BlocBuilder<OnboardingCubit, OnboardingState>(
+              builder: (context, state) {
+                final cubit = context.read<OnboardingCubit>();
 
-            Expanded(
-              child: PageView.builder(
-                controller: controller,
-                itemCount: OnboardingData.pages.length,
-                onPageChanged: (i) {
-                  setState(() => index = i);
-                },
-                itemBuilder: (context, i) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(OnboardingData.pages[i].image, height: 250),
-                      const SizedBox(height: 30),
-                      Text(
-                        OnboardingData.pages[i].title,
-                        style: Theme.of(context).textTheme.headlineLarge,
+                return Column(
+                  children: [
+                    // Skip
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: TextButton(
+                        onPressed: () {
+                          cubit.controller.animateToPage(
+                            pages.length - 1,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        child: const Text("Skip"),
                       ),
-                      const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: Text(
-                          OnboardingData.pages[i].description,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyMedium!
-                              .copyWith(color: t.text3),
+                    ),
+
+                    // Pages
+                    Expanded(
+                      child: PageView.builder(
+                        controller: cubit.controller,
+                        itemCount: pages.length,
+                        onPageChanged: (i) =>
+                            cubit.onPageChanged(i, pages.length),
+                        itemBuilder: (context, i) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(pages[i].image, height: 250),
+                              const SizedBox(height: 30),
+                              Text(
+                                pages[i].title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge,
+                              ),
+                              const SizedBox(height: 10),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 30),
+                                child: Text(
+                                  pages[i].description,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(color: t.text3),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+
+                    // Dots Indicator
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        pages.length,
+                        (i) => AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.all(4),
+                          width: state.index == i ? 20 : 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: state.index == i
+                                ? Theme.of(context).colorScheme.primary
+                                : t.border,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
                       ),
-                    ],
-                  );
-                },
-              ),
-            ),
+                    ),
 
-            // Dots Indicator
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                OnboardingData.pages.length,
-                (i) => AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  margin: const EdgeInsets.all(4),
-                  width: index == i ? 20 : 8,
-                  height: 8,
-                  decoration: BoxDecoration(
-                    color: index == i
-                        ? Theme.of(context).colorScheme.primary
-                        : t.border,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-            ),
+                    const SizedBox(height: 20),
 
-            const SizedBox(height: 20),
-
-            // Next Button
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (index == OnboardingData.pages.length - 1) {
-                    // go to login
-                  } else {
-                    controller.nextPage(
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.easeInOut,
-                    );
-                  }
-                },
-                child: Text(index == OnboardingData.pages.length - 1
-                    ? "Get Started"
-                    : "Next"),
-              ),
+                    // Next Button
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          cubit.next(pages.length);
+                        },
+                        child: Text(
+                          state.isLast ? "Get Started" : "Next",
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
-          ],
+          ),
         ),
       ),
     );

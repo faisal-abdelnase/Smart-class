@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/auth/presentation/pages/login_page.dart';
 import 'routes.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 
@@ -17,6 +18,9 @@ class AppRouter {
 
       case Routes.onboardingPage:
           return MaterialPageRoute(builder: (_)=> OnboardingPage());
+
+      case Routes.loginPage:
+          return MaterialPageRoute(builder: (_)=> LoginPage());
 
       default:
         return null;

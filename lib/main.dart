@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:smart_class/core/routing/app_router.dart';
-import 'package:smart_class/core/routing/routes.dart';
-import 'package:smart_class/core/theme/app_theme.dart';
+import 'core/di/service_locator.dart';
+import 'core/routing/app_router.dart';
+import 'core/routing/routes.dart';
+import 'core/services/hive_services.dart';
+import 'core/theme/app_theme.dart';
 
-void main() {
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await HiveService.init();
+  await init();
+
   runApp(const SmartClass());
 }
 
@@ -18,6 +26,7 @@ class _SmartClassState extends State<SmartClass> {
   @override
   Widget build(BuildContext context) {
 
+    // ignore: no_leading_underscores_for_local_identifiers
     ThemeMode _themeMode = ThemeMode.system;
       // ignore: unused_element
       void toggleTheme() => setState(() {

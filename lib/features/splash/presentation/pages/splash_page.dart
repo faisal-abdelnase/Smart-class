@@ -4,8 +4,10 @@ import 'package:smart_class/core/theme/app_text_styles.dart';
 import 'package:smart_class/core/theme/app_theme_extensions.dart';
 import 'package:smart_class/core/utils/constants.dart';
 
+import '../../../../core/di/service_locator.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../onboarding/domain/repositories/onboarding_repository.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -40,9 +42,15 @@ class _SplashPageState extends State<SplashPage>
     controller.forward();
 
     Future.delayed(const Duration(seconds: 3), () {
-      if(mounted) {
+      if(!mounted) return;
+
+      final isFirst = sl<OnboardingRepository>().isFirstTime();
+
+      if (isFirst) {
         context.pushReplacementNamed(Routes.onboardingPage);
-      }
+      } else {
+        context.pushReplacementNamed(Routes.loginPage);
+      } 
     });
   }
 
