@@ -10,6 +10,7 @@ import '../../features/onboarding/domain/usecases/complete_onboarding.dart';
 
 // Presentation
 import '../../features/onboarding/presentation/cubit/onboarding_cubit.dart';
+import '../localization/locale_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -29,4 +30,7 @@ Future<void> init() async {
   sl.registerLazySingleton<OnboardingLocalDataSource>(
     () => OnboardingLocalDataSourceImpl(),
   );
+
+
+  sl.registerLazySingleton(() => LocaleCubit());
 }

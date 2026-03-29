@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/service_locator.dart';
+import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../data/datasources/onboarding_local_data.dart';
@@ -42,7 +43,7 @@ class OnboardingPage extends StatelessWidget {
                             curve: Curves.easeInOut,
                           );
                         },
-                        child: const Text("Skip"),
+                        child: Text(AppLocalizations.of(context)!.translate("skip")),
                       ),
                     ),
 
@@ -60,7 +61,7 @@ class OnboardingPage extends StatelessWidget {
                               Image.asset(pages[i].image, height: 250),
                               const SizedBox(height: 30),
                               Text(
-                                pages[i].title,
+                                AppLocalizations.of(context)!.translate(pages[i].title),
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineLarge,
@@ -70,7 +71,7 @@ class OnboardingPage extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 30),
                                 child: Text(
-                                  pages[i].description,
+                                  AppLocalizations.of(context)!.translate(pages[i].description),
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
@@ -114,7 +115,8 @@ class OnboardingPage extends StatelessWidget {
                           cubit.next(pages.length);
                         },
                         child: Text(
-                          state.isLast ? "Get Started" : "Next",
+                          state.isLast ? AppLocalizations.of(context)!.translate("Get Started") 
+                          : AppLocalizations.of(context)!.translate("Next"),
                         ),
                       ),
                     ),

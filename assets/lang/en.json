@@ -2,7 +2,12 @@
     "app_name": "Smart Class",
     "login": "Login",
     "welcome": "Welcome",
-    "onboarding_title1": "Learn Easily",
-    "onboarding_title2": "Track Progress",
-    "onboarding_title3": "Start Now"
+    "skip": "Skip",
+    "Next": "Next",
+    "Learn Smart": "Learn Smart",
+    "Track Progress": "Track Progress",
+    "Get Started": "Get Started",
+    "Study anytime anywhere": "Study anytime anywhere",
+    "Monitor your learning journey": "Monitor your learning journey",
+    "Start your smart learning now": "Start your smart learning now"
 }

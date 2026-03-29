@@ -2,7 +2,12 @@
     "app_name": "سمارت كلاس",
     "login": "تسجيل الدخول",
     "welcome": "مرحبا",
-    "onboarding_title1": "تعلم بسهولة",
-    "onboarding_title2": "تابع تقدمك",
-    "onboarding_title3": "ابدأ الآن"
+    "skip": "تخطي",
+    "Next": "التالي",
+    "Learn Smart": "تعلم بذكاء",
+    "Track Progress": "تابع تقدمك",
+    "Get Started": "ابدأ الآن",
+    "Study anytime anywhere": "ادرس في أي وقت وأي مكان",
+    "Monitor your learning journey": "راقب رحلتك التعليمية",
+    "Start your smart learning now": "ابدأ تعلمك الذكي الآن"
 }
