@@ -37,7 +37,8 @@ Widget  buildMobile(BuildContext context, AppResponsive r) {
             SizedBox(height: r.sp(AppDimensions.sp2)),
             AppText(
               AppLocalizations.of(context)!.translate(
-                  "Connecting instructors, students & parents."),
+                  "Connecting instructors,\n students & parents."),
+              textAlign: TextAlign.center,
               baseFontSize: r.bodySize,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
