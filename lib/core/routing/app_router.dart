@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
+import '../../features/auth/presentation/pages/register_page.dart';
+import '../../features/auth/presentation/pages/role_selection_page.dart';
 import 'routes.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 
@@ -21,6 +23,18 @@ class AppRouter {
 
       case Routes.loginPage:
           return MaterialPageRoute(builder: (_)=> LoginPage());
+
+      case Routes.signupPage:
+        return MaterialPageRoute(builder: (_)=> SignupPage());
+  
+
+      case Routes.forgotPasswordPage:
+        // return MaterialPageRoute(builder: (_)=> ForgotPasswordPage());
+        return null;
+
+      case Routes.roleSelectionPage:
+        return MaterialPageRoute(builder: (_)=> RoleSelectionPage());
+        
 
       default:
         return null;
