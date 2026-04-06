@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/responsive/app_responsive.dart';
 import '../../../../core/responsive/responsive_padding.dart';
 import '../../../../core/responsive/responsive_text.dart';
 import '../../../../core/theme/app_dimension.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_theme_extensions.dart';
 import '../../../../core/utils/constants.dart';
 import '../view_models/role_model.dart';
 import 'app_bar_rich_text.dart';
+import 'build_local_lang.dart';
+import 'build_theme_toggle.dart';
 import 'role_card.dart';
 
 Widget  buildMobile(BuildContext context, AppResponsive r) {
+  final t = Theme.of(context).extension<AppThemeColors>()!;
     return Scaffold(
     appBar: AppBar(
-      title:  AppBarRichText(),
-    ),
+      title: AppBarRichText(),
+      actions: [
+        // 🌙 Theme
+        buildThemeToggle(t, context),
+        const SizedBox(width: 16),
+
+        // 🌍 Language
+        buildLocalLang(context),
+  ],
+),
 
     body: AppScreenPadding(
       child: Center(
@@ -37,7 +48,7 @@ Widget  buildMobile(BuildContext context, AppResponsive r) {
             SizedBox(height: r.sp(AppDimensions.sp2)),
             AppText(
               AppLocalizations.of(context)!.translate(
-                  "Connecting instructors,\n students & parents."),
+                  "Connecting instructors, students & parents."),
               textAlign: TextAlign.center,
               baseFontSize: r.bodySize,
               style: Theme.of(context).textTheme.bodyMedium,
