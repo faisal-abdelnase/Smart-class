@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/responsive/app_responsive.dart';
 import '../../../../core/localization/app_localizations.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
+import '../widgets/build_auth_row.dart';
 import '../widgets/build_background.dart';
-import '../widgets/build_card.dart';
+import '../widgets/auth_card.dart';
 import '../widgets/build_footer.dart';
+import '../widgets/build_signup_form_field.dart';
+import '../widgets/auth_button.dart';
 
 
 class SignupPage extends StatefulWidget {
@@ -89,7 +93,38 @@ class _SignupPageState extends State<SignupPage>
                   position: _slideAnim,
                   child: Form(
                     key: _formKey,
-                    child: buildCard(t, r, l10n, isDark, nameController, emailController, passwordController, _isLoading, handleSignup, context),
+                    child: AuthCard(
+                            t: t,
+                            r: r,
+                            l10n: l10n,
+                            isDark: isDark,
+
+                            title: "create_account",
+                            subtitle: "join_community",
+
+                            formFields: buildSignUpFormFields(
+                              l10n,
+                              nameController,
+                              emailController,
+                              passwordController,
+                            ),
+
+                            actionButton: AuthButton(
+                                l10n: l10n,
+                                r: r,
+                                isLoading: _isLoading,
+                                onPressed: handleSignup,
+                                textKey: "sign_up",
+                              ),
+
+                            bottomRow: buildAuthRow(
+                              t,
+                              l10n,
+                              context,
+                              "already_have_account",
+                              Routes.loginPage,
+                            ),
+                          ),
                   ),
                 ),
               ),

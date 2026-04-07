@@ -9,6 +9,7 @@ import '../../../../core/di/service_locator.dart';
 import '../../../../core/localization/locale_cubit.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/services/hive_services.dart';
+import '../../../../core/theme/theme_cubit.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../onboarding/domain/repositories/onboarding_repository.dart';
 
@@ -50,18 +51,27 @@ class _SplashPageState extends State<SplashPage>
 
       String lang = HiveService.box.get('lang', defaultValue: 'en');
 
-    if (lang == 'ar') {
-      context.read<LocaleCubit>().changeLanguage('ar');
+      if (lang == 'ar') {
+        context.read<LocaleCubit>().changeLanguage('ar');
+      } else {
+        context.read<LocaleCubit>().changeLanguage('en');
+      }
+
+    String theme = HiveService.box.get('theme', defaultValue: 'light');
+
+    if (theme == 'dark') {
+      context.read<ThemeCubit>().setDark();
     } else {
-      context.read<LocaleCubit>().changeLanguage('en');
+      context.read<ThemeCubit>().setLight();
     }
+
 
       final isFirst = sl<OnboardingRepository>().isFirstTime();
 
       if (isFirst) {
         context.pushReplacementNamed(Routes.onboardingPage);
       } else {
-        context.pushReplacementNamed(Routes.loginPage);
+        context.pushReplacementNamed(Routes.roleSelectionPage);
       } 
     });
   }
@@ -97,7 +107,7 @@ class _SplashPageState extends State<SplashPage>
                 opacity: textOpacity,
                 child: Text("EduConnect", 
                 style: AppTypography.displayLarge.copyWith(
-                  color: t.textInverse
+                  color: Colors.white
                 )
                 ,)
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/localization/app_localizations.dart';
 
 
 class AuthTextField extends StatefulWidget {
@@ -11,6 +12,7 @@ class AuthTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
   final bool showToggle;
+  final AppLocalizations l10n;
 
   const AuthTextField({
     super.key,
@@ -22,7 +24,8 @@ class AuthTextField extends StatefulWidget {
     required this.controller,
     this.validator,
     this.keyboardType = TextInputType.text,
-    this.showToggle = false,
+    this.showToggle = false, 
+    required this.l10n,
   });
 
   @override
@@ -47,7 +50,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          widget.label,
+          widget.l10n.translate(widget.label),
           style: theme.textTheme.labelLarge,
         ),
         SizedBox(height: 8),

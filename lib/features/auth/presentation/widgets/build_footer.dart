@@ -10,8 +10,9 @@ Widget buildFooter(AppThemeColors t, AppLocalizations? l10n) {
       right: 0,
       child: Center(
         child: Text(
-          'EDUCONNECT • 2024',
-          style: TextStyle(color: t.text4),
+          textAlign: TextAlign.center,
+          l10n!.translate("terms_text"),
+          style: TextStyle(color: t.text4,),
         ),
       ),
     );

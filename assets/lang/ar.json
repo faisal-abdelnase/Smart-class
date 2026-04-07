@@ -20,5 +20,32 @@
 
     "Welcome to EduConnect": "مرحبًا بك في\nEduConnect",
     "Connecting instructors, students & parents.": "ربط المعلمين  والطلاب وأولياء الأمور.",
-    "SIGN IN AS": "تسجيل الدخول كـ"
+    "SIGN IN AS": "تسجيل الدخول كـ",
+    "The smart educational platform connecting everyone.": "المنصة التعليمية الذكية التي تربط الجميع.",
+
+    "create_account": "إنشاء حساب",
+    "join_community": "انضم إلى مجتمع المتعلمين",
+    "full_name": "الاسم الكامل",
+    "full_name_hint": "أدخل اسمك الكامل",
+    "email_address": "البريد الإلكتروني",
+    "email_hint": "name@university.edu",
+    "password": "كلمة المرور",
+    "password_hint": "أدخل كلمة المرور",
+    "sign_up": "إنشاء حساب",
+    "or_with_email": "أو باستخدام البريد الإلكتروني",
+    "or_continue_with": "أو تابع مع",
+    "google": "جوجل",
+    "apple": "آبل",
+    "already_have_account": "هل لديك حساب بالفعل؟",
+    "log_in": "تسجيل الدخول",
+    "terms_text": "بالتسجيل، أنت توافق على شروط الخدمة وسياسة الخصوصية.",
+    "footer_text": "نظام إيدوكونكت المهني • 2024",
+    "name_required": "الاسم الكامل مطلوب",
+    "email_required": "البريد الإلكتروني مطلوب",
+    "email_invalid": "أدخل بريداً إلكترونياً صحيحاً",
+    "password_required": "كلمة المرور مطلوبة",
+    "password_min": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+    "welcome_back": "مرحبًا بعودتك",
+    "login_subtitle": "تسجيل الدخول لمتابعة التعلم",
+    "dont_have_account": "ليس لديك حساب؟"
 }
