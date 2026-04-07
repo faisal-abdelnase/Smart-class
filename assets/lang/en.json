@@ -41,5 +41,10 @@
     "password_min": "Password must be at least 8 characters",
     "welcome_back": "Welcome Back",
     "login_subtitle": "Login to continue learning",
-    "dont_have_account": "Don't have an account?"
+    "dont_have_account": "Don't have an account?",
+    "forgot_password": "Forgot Password?",
+    "enter_email_reset": "Enter your email to receive password reset instructions",
+    "send_link": "Send Link",
+    "no_access": "Don't have access to this email?",
+    "contact_support": "Contact support"
 }
