@@ -7,4 +7,5 @@ class Routes {
   static const String signupPage = '/signupPage';
   static const String forgotPasswordPage = '/forgotPasswordPage';
   static const String roleSelectionPage = '/roleSelectionPage';
+  static const String verifyEmailPage = '/verifyEmail';
 }

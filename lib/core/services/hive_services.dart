@@ -8,3 +8,10 @@ class HiveService {
 
   static Box get box => Hive.box('app');
 }
+
+
+class HiveKeys {
+  static const theme = 'theme';
+  static const locale = 'locale';
+  static const role = 'role';
+}

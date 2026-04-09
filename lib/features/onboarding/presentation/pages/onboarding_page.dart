@@ -23,7 +23,7 @@ class OnboardingPage extends StatelessWidget {
           child: BlocListener<OnboardingCubit, OnboardingState>(
             listener: (context, state) {
               if (state.isDone) {
-                context.pushReplacementNamed(Routes.loginPage);
+                context.pushReplacementNamed(Routes.roleSelectionPage);
               }
             },
             child: BlocBuilder<OnboardingCubit, OnboardingState>(

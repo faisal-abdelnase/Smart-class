@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/di/service_locator.dart';
+import '../../features/auth/presentation/cubit/verify_email_cubit.dart';
+import '../../features/auth/presentation/pages/forgot_password_page.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/register_page.dart';
 import '../../features/auth/presentation/pages/role_selection_page.dart';
+import '../../features/auth/presentation/pages/verify_email_page.dart';
 import 'routes.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 
@@ -16,25 +21,48 @@ class AppRouter {
     switch(routeSettings.name){
 
       case Routes.splashPage:
-        return MaterialPageRoute(builder: (_)=> SplashPage());
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_)=> SplashPage(),
+        );
 
       case Routes.onboardingPage:
-          return MaterialPageRoute(builder: (_)=> OnboardingPage());
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_)=> OnboardingPage(),
+        );
 
       case Routes.loginPage:
-          return MaterialPageRoute(builder: (_)=> LoginPage());
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_)=> LoginPage(),
+        );
 
       case Routes.signupPage:
-        return MaterialPageRoute(builder: (_)=> SignupPage());
-  
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_)=> SignupPage(),
+        );
 
       case Routes.forgotPasswordPage:
-        // return MaterialPageRoute(builder: (_)=> ForgotPasswordPage());
-        return null;
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_)=> ForgotPasswordPage(),
+        );
 
       case Routes.roleSelectionPage:
-        return MaterialPageRoute(builder: (_)=> RoleSelectionPage());
-        
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_)=> RoleSelectionPage(),
+        );
+
+        case Routes.verifyEmailPage:
+          return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (_) => sl<VerifyEmailCubit>(),
+              child: const VerifyEmailPage(),
+            ),
+          );
 
       default:
         return null;

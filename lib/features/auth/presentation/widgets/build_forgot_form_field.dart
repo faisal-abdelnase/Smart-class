@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/localization/app_localizations.dart';
+import '../../../../core/utils/validators.dart';
 import 'auth_text_filed.dart';
 
 Widget buildForgotFormField(
@@ -13,5 +14,6 @@ Widget buildForgotFormField(
     controller: emailController,
     keyboardType: TextInputType.emailAddress,
     prefixIcon: Icons.email_outlined,
+    validator:  Validators.email,
   );
 }

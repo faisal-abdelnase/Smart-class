@@ -46,5 +46,17 @@
     "enter_email_reset": "Enter your email to receive password reset instructions",
     "send_link": "Send Link",
     "no_access": "Don't have access to this email?",
-    "contact_support": "Contact support"
+    "contact_support": "Contact support",
+    "slect_role_instead": "Select role instead",
+    "Reset link sent successfully": "Reset link sent successfully",
+    "Login successful": "Login successful",
+    "Check your email to verify your account 📧": "Check your email to verify your account 📧",
+    "Email verified successfully": "Email verified successfully",
+    "User not found": "User not found",
+    "Wrong password": "Wrong password",
+    "Email already exists": "Email already exists",
+    "Invalid email": "Invalid email",
+    "Weak password": "Weak password",
+    "Please verify your email first": "Please verify your email first",
+    "Authentication error": "Authentication error"
 }

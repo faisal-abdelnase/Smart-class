@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/theme/app_shadows.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import 'package:smart_class/features/auth/presentation/view_models/role_model.dart';
-
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/routing/routes.dart';
-import '../../../../core/services/hive_services.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimension.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -21,8 +20,7 @@ class RoleCard extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: () {
-        HiveService.box.put(HiveKeys.role, role.title);
-        Navigator.pushNamed(context, Routes.signupPage);
+        context.pushNamed(Routes.signupPage, arguments: role.role);
       },
       child: Container(
         padding: AppDimensions.cardPadding,

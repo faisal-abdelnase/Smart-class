@@ -11,13 +11,14 @@ import 'core/routing/routes.dart';
 import 'core/services/hive_services.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_cubit.dart';
+import 'features/auth/presentation/cubit/auth_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-//   await Firebase.initializeApp(
-//     options: DefaultFirebaseOptions.currentPlatform,
-// );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
 
   await HiveService.init();
   await init();
@@ -34,6 +35,7 @@ class SmartClass extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => sl<LocaleCubit>()),
         BlocProvider(create: (_) => sl<ThemeCubit>()),
+        BlocProvider(create: (_) => sl<AuthCubit>()),
       ],
       child: BlocBuilder<LocaleCubit, Locale>(
         builder: (context, locale) {

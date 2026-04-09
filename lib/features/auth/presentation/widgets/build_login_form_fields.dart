@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/validators.dart';
 import 'auth_text_filed.dart';
 
 Widget buildLoginFormFields(
@@ -19,6 +20,7 @@ Widget buildLoginFormFields(
         controller: emailController,
         keyboardType: TextInputType.emailAddress,
         prefixIcon: Icons.email_outlined,
+        validator: Validators.email,
       ),
       const SizedBox(height: 12),
       AuthTextField(
@@ -29,6 +31,7 @@ Widget buildLoginFormFields(
         obscureText: true,
         prefixIcon: Icons.lock_outline,
         showToggle: true,
+        validator: Validators.password,
       ),
 
       const SizedBox(height: 12),

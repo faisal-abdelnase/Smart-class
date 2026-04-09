@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/localization/app_localizations.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/validators.dart';
 import 'auth_text_filed.dart';
 
-Widget buildSignUpFormFields(AppLocalizations? l10n, TextEditingController nameController, TextEditingController emailController, TextEditingController passwordController) {
+Widget buildSignUpFormFields(
+  AppLocalizations? l10n, 
+  TextEditingController nameController, 
+  TextEditingController emailController, 
+  TextEditingController passwordController,
+  BuildContext context,) {
     return Column(
       children: [
         AuthTextField(
@@ -12,6 +20,7 @@ Widget buildSignUpFormFields(AppLocalizations? l10n, TextEditingController nameC
           label: "full_name",
           controller: nameController,
           prefixIcon: Icons.person_outline,
+          validator: Validators.name,
         ),
         const SizedBox(height: 12),
         AuthTextField(
@@ -21,6 +30,7 @@ Widget buildSignUpFormFields(AppLocalizations? l10n, TextEditingController nameC
           controller: emailController,
           keyboardType: TextInputType.emailAddress,
           prefixIcon: Icons.email_outlined,
+          validator: Validators.email,
         ),
         const SizedBox(height: 12),
         AuthTextField(
@@ -31,7 +41,20 @@ Widget buildSignUpFormFields(AppLocalizations? l10n, TextEditingController nameC
           obscureText: true,
           prefixIcon: Icons.lock_outline,
           showToggle: true,
+          validator: Validators.password,
         ),
+
+        const SizedBox(height: 12),
+
+      Align(
+        alignment: Alignment.centerRight,
+        child: TextButton(
+          onPressed: () {
+            context.pushNamedAndRemoveUntil(Routes.roleSelectionPage, predicate: (route) => false,);
+          },
+          child: Text(l10n.translate("slect_role_instead")),
+        ),
+      ),
       ],
     );
   }

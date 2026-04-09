@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/responsive/app_responsive.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
+import '../../../../core/utils/auth_dialogs.dart';
+import '../cubit/auth_cubit.dart';
 import '../widgets/auth_card.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/build_background.dart';
@@ -20,7 +23,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
 
-  bool _isLoading = false;
 
   late AnimationController _animController;
   late Animation<double> _fadeAnim;
@@ -35,8 +37,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
       duration: const Duration(milliseconds: 600),
     );
 
-    _fadeAnim =
-        CurvedAnimation(parent: _animController, curve: Curves.easeOut);
+    _fadeAnim = CurvedAnimation(parent: _animController, curve: Curves.easeOut);
 
     _slideAnim = Tween<Offset>(
       begin: const Offset(0, 0.06),
@@ -55,11 +56,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
 
   void handleSendLink() async {
     if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-
-      await Future.delayed(const Duration(seconds: 2));
-
-      if (mounted) setState(() => _isLoading = false);
+      context.read<AuthCubit>().forgotPassword(emailController.text.trim());
     }
   }
 
@@ -75,48 +72,62 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
         children: [
           buildBackground(isDark),
 
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                horizontal: r.hPadding,
-                vertical: 20,
-              ),
-              child: FadeTransition(
-                opacity: _fadeAnim,
-                child: SlideTransition(
-                  position: _slideAnim,
-                  child: Form(
-                    key: _formKey,
-                    child: AuthCard(
-                      t: t,
-                      r: r,
-                      l10n: l10n,
-                      isDark: isDark,
+          BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {
+              if (state is AuthError && state.status == AuthStatus.forgot) {
+                showErrorSnackBar(context, l10n?.translate(state.message) ?? state.message);
+              }
 
-                      title: "forgot_password",
-                      subtitle: "enter_email_reset",
+              if (state is AuthSuccess && state.status == AuthStatus.forgot) {
+                showSuccessSnackBar(context, l10n?.translate("Reset link sent successfully") ?? "Reset link sent successfully");
+                  emailController.clear();
+              }
+            },
+            builder: (context, state) {
+              final isLoading = state is AuthLoading;
+              return SafeArea(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: r.hPadding,
+                    vertical: 20,
+                  ),
+                  child: FadeTransition(
+                    opacity: _fadeAnim,
+                    child: SlideTransition(
+                      position: _slideAnim,
+                      child: Form(
+                        key: _formKey,
+                        child: AuthCard(
+                          t: t,
+                          r: r,
+                          l10n: l10n,
+                          isDark: isDark,
 
-                      formFields: buildForgotFormField(
-                        l10n,
-                        emailController,
+                          title: "forgot_password",
+                          subtitle: "enter_email_reset",
+
+                          formFields: buildForgotFormField(
+                            l10n,
+                            emailController,
+                          ),
+
+                          actionButton: AuthButton(
+                            l10n: l10n,
+                            r: r,
+                            isLoading: isLoading,
+                            onPressed: handleSendLink,
+                            textKey: "send_link",
+                          ),
+
+                          bottomRow: buildForgotBottom(t, l10n),
+                        ),
                       ),
-
-                      actionButton: AuthButton(
-                        l10n: l10n,
-                        r: r,
-                        isLoading: _isLoading,
-                        onPressed: handleSendLink,
-                        textKey: "send_link",
-                      ),
-
-                      bottomRow: buildForgotBottom(t, l10n),
                     ),
                   ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
-
         ],
       ),
     );

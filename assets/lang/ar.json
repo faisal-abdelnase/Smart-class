@@ -52,5 +52,17 @@
     "enter_email_reset": "أدخل بريدك الإلكتروني لتلقي تعليمات إعادة تعيين كلمة المرور",
     "send_link": "إرسال الرابط",
     "no_access": "لا يمكنك الوصول إلى هذا البريد الإلكتروني؟",
-    "contact_support": "اتصل بالدعم"
+    "contact_support": "اتصل بالدعم",
+    "slect_role_instead": "اختر الدور بدلاً من ذلك",
+    "Reset link sent successfully": "تم إرسال رابط إعادة التعيين بنجاح",
+    "Login successful": "تم تسجيل الدخول بنجاح",
+    "Check your email to verify your account 📧": "تحقق من بريدك الإلكتروني لتأكيد حسابك 📧",
+    "Email verified successfully": "تم تأكيد البريد الإلكتروني بنجاح",
+    "User not found": "المستخدم غير موجود",
+    "Wrong password": "كلمة المرور خاطئة",
+    "Email already exists": "البريد الإلكتروني موجود بالفعل",
+    "Invalid email": "البريد الإلكتروني غير صالح",
+    "Weak password": "كلمة المرور ضعيفة",
+    "Please verify your email first": "يرجى تأكيد بريدك الإلكتروني أولاً",
+    "Authentication error": "خطأ في المصادقة"
 }

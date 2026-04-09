@@ -7,27 +7,19 @@ import 'app_responsive.dart';
 class AppText extends StatelessWidget {
   final String text;
   final double baseFontSize;
-  final FontWeight? fontWeight;
-  final Color? color;
-  final String? fontFamily;
-  final double? letterSpacing;
-  final double? height;
   final TextAlign? textAlign;
   final int? maxLines;
   final TextOverflow? overflow;
+  final TextStyle? style;
 
   const AppText(
     this.text, {
     super.key,
     required this.baseFontSize,
-    this.fontWeight,
-    this.color,
-    this.fontFamily,
-    this.letterSpacing,
-    this.height,
     this.textAlign,
     this.maxLines,
     this.overflow,
+    this.style,
   });
 
   @override
@@ -38,14 +30,7 @@ class AppText extends StatelessWidget {
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,
-      style: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: r.fs(baseFontSize),
-        fontWeight: fontWeight,
-        color: color,
-        letterSpacing: letterSpacing,
-        height: height,
-      ),
+      style: style!.copyWith(fontSize: r.sp(baseFontSize)) 
     );
   }
 }

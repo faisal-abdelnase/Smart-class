@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_class/core/theme/app_colors.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
-import 'package:smart_class/core/theme/app_theme_extensions.dart';
 import 'package:smart_class/core/utils/constants.dart';
 
 import '../../../../core/di/service_locator.dart';
@@ -84,7 +83,7 @@ class _SplashPageState extends State<SplashPage>
 
   @override
   Widget build(BuildContext context) {
-    final t = Theme.of(context).extension<AppThemeColors>()!;
+    // final t = Theme.of(context).extension<AppThemeColors>()!;
 
     return Scaffold(
       body: Container(

@@ -1,15 +1,21 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_class/core/responsive/app_responsive.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
+import '../../../../core/utils/auth_dialogs.dart';
+import '../cubit/auth_cubit.dart';
+import '../view_models/role_model.dart';
 import '../widgets/build_auth_row.dart';
 import '../widgets/build_background.dart';
 import '../widgets/auth_card.dart';
 import '../widgets/build_footer.dart';
 import '../widgets/build_signup_form_field.dart';
 import '../widgets/auth_button.dart';
-
 
 class SignupPage extends StatefulWidget {
   final VoidCallback? onToggleTheme;
@@ -27,8 +33,6 @@ class _SignupPageState extends State<SignupPage>
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  bool _isLoading = false;
-
   late AnimationController _animController;
   late Animation<double> _fadeAnim;
   late Animation<Offset> _slideAnim;
@@ -42,8 +46,7 @@ class _SignupPageState extends State<SignupPage>
       duration: const Duration(milliseconds: 600),
     );
 
-    _fadeAnim =
-        CurvedAnimation(parent: _animController, curve: Curves.easeOut);
+    _fadeAnim = CurvedAnimation(parent: _animController, curve: Curves.easeOut);
 
     _slideAnim = Tween<Offset>(
       begin: const Offset(0, 0.06),
@@ -62,11 +65,19 @@ class _SignupPageState extends State<SignupPage>
     super.dispose();
   }
 
-  void handleSignup() async {
+  void handleSignup() {
+    final role = ModalRoute.of(context)!.settings.arguments as UserRole;
+
     if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-      await Future.delayed(const Duration(seconds: 2));
-      if (mounted) setState(() => _isLoading = false);
+      log("FORM VALID ✅");
+      context.read<AuthCubit>().signup(
+        nameController.text.trim(),
+        emailController.text.trim(),
+        passwordController.text.trim(),
+        role.name,
+      );
+
+      
     }
   }
 
@@ -82,52 +93,71 @@ class _SignupPageState extends State<SignupPage>
         children: [
           buildBackground(isDark),
           SafeArea(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                horizontal: r.hPadding,
-                vertical: 20,
-              ),
-              child: FadeTransition(
-                opacity: _fadeAnim,
-                child: SlideTransition(
-                  position: _slideAnim,
-                  child: Form(
-                    key: _formKey,
-                    child: AuthCard(
-                            t: t,
-                            r: r,
-                            l10n: l10n,
-                            isDark: isDark,
+            child: BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthError && state.status == AuthStatus.signup) {
+                  showErrorSnackBar(context, l10n?.translate(state.message) ?? state.message);
+                }
 
-                            title: "create_account",
-                            subtitle: "join_community",
-
-                            formFields: buildSignUpFormFields(
-                              l10n,
-                              nameController,
-                              emailController,
-                              passwordController,
-                            ),
-
-                            actionButton: AuthButton(
-                                l10n: l10n,
-                                r: r,
-                                isLoading: _isLoading,
-                                onPressed: handleSignup,
-                                textKey: "sign_up",
-                              ),
-
-                            bottomRow: buildAuthRow(
-                              t,
-                              l10n,
-                              context,
-                              "already_have_account",
-                              Routes.loginPage,
-                            ),
-                          ),
+                if (state is AuthSuccess && state.status == AuthStatus.signup) {
+                  showSuccessSnackBar(context, l10n?.translate("Check your email to verify your account 📧") ?? "Check your email to verify your account 📧");
+                  nameController.clear();
+                  emailController.clear();
+                  passwordController.clear();
+                  context.pushReplacementNamed(Routes.verifyEmailPage);
+                }
+              },
+              builder: (context, state) {
+                final isLoading = state is AuthLoading;
+                return SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: r.hPadding,
+                    vertical: 20,
                   ),
-                ),
-              ),
+                  child: FadeTransition(
+                    opacity: _fadeAnim,
+                    child: SlideTransition(
+                      position: _slideAnim,
+                      child: Form(
+                        key: _formKey,
+                        child: AuthCard(
+                          t: t,
+                          r: r,
+                          l10n: l10n,
+                          isDark: isDark,
+
+                          title: "create_account",
+                          subtitle: "join_community",
+
+                          formFields: buildSignUpFormFields(
+                            l10n,
+                            nameController,
+                            emailController,
+                            passwordController,
+                            context
+                          ),
+
+                          actionButton: AuthButton(
+                            l10n: l10n,
+                            r: r,
+                            isLoading: isLoading,
+                            onPressed: handleSignup,
+                            textKey: "sign_up",
+                          ),
+
+                          bottomRow: buildAuthRow(
+                            t,
+                            l10n,
+                            context,
+                            "already_have_account",
+                            Routes.loginPage,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
           buildFooter(t, l10n),
@@ -135,5 +165,4 @@ class _SignupPageState extends State<SignupPage>
       ),
     );
   }
-
 }

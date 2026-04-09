@@ -18,6 +18,7 @@ import '../../features/onboarding/domain/repositories/onboarding_repository.dart
 import '../../features/onboarding/domain/usecases/complete_onboarding.dart';
 
 // Presentation
+import '../../features/auth/presentation/cubit/verify_email_cubit.dart';
 import '../../features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import '../localization/locale_cubit.dart';
 import '../services/firebase_auth_service.dart';
@@ -28,6 +29,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   //! Cubit
   sl.registerFactory(() => OnboardingCubit(sl()));
+  sl.registerFactory(() => VerifyEmailCubit(sl()));
 
   //! UseCases
   sl.registerLazySingleton(() => CompleteOnboarding(sl()));
@@ -69,5 +71,5 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ForgotPasswordUseCase(sl()));
 
   // Cubit
-  sl.registerFactory(() => AuthCubit(sl(), sl(), sl()));
+  sl.registerLazySingleton(() => AuthCubit(sl(), sl(), sl()));
 }
