@@ -5,6 +5,7 @@ import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
 import '../../../../core/utils/auth_dialogs.dart';
+import '../../../../core/utils/extensions.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/build_auth_row.dart';
 import '../widgets/build_background.dart';
@@ -82,7 +83,7 @@ class _LoginPageState extends State<LoginPage>
             child: BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is AuthError && state.status == AuthStatus.login) {
-                showErrorSnackBar(context, state.message);
+                showErrorSnackBar(context, l10n?.translate(state.message) ?? state.message);
               }
 
               if (state is AuthError &&
@@ -96,6 +97,8 @@ class _LoginPageState extends State<LoginPage>
                 showSuccessSnackBar(context, l10n?.translate("Login successful") ?? "Login successful");
                   emailController.clear();
                   passwordController.clear();
+
+                  context.pushReplacementNamed(Routes.instructorFormPage);
               }
               },
               builder: (context, state) {

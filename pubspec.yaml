@@ -31,6 +31,7 @@ dependencies:
   cloud_firestore: ^6.2.0
   cupertino_icons: ^1.0.8
   dart_either: ^2.1.0
+  file_picker: ^11.0.2
   firebase_auth: ^6.3.0
   firebase_core: ^4.6.0
   flutter:

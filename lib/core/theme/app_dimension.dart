@@ -56,11 +56,11 @@ class AppDimensions {
 
 
   // AVATAR SIZES
-
+  static const double avatarS = 16.0;
   static const double avatarXS = 24.0;
   static const double avatarSM = 32.0;
   static const double avatarMD = 40.0;
-  static const double avatarLG = 52.0;
+  static const double avatarLG = 50.0;
   static const double avatarXL = 68.0;
 
 
