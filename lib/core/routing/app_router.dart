@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/di/service_locator.dart';
+import '../../features/auth/data/models/user_model.dart';
+import '../../features/auth/domain/entiyies/user_role.dart';
 import '../../features/auth/presentation/cubit/verify_email_cubit.dart';
 import '../../features/auth/presentation/pages/forgot_password_page.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/register_page.dart';
 import '../../features/auth/presentation/pages/role_selection_page.dart';
 import '../../features/auth/presentation/pages/verify_email_page.dart';
-import '../../features/profile_completion/presentation/pages/instructor_profile_setup_page.dart';
+import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/profile_completion/presentation/pages/profile_completion_page.dart';
 import 'routes.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 
@@ -31,6 +34,16 @@ class AppRouter {
         return MaterialPageRoute(
           settings: routeSettings,
           builder: (_)=> OnboardingPage(),
+        );
+
+      case Routes.profileCompletionPage:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => ProfileCompletionPage(
+            user: routeSettings.arguments is UserModel
+                ? routeSettings.arguments as UserModel
+                : null,
+          ),
         );
 
       case Routes.loginPage:
@@ -66,16 +79,37 @@ class AppRouter {
           );
 
           case Routes.studentFormPage:
-            // return MaterialPageRoute(builder: (_) => StudentFormPage());
+            return MaterialPageRoute(
+              builder: (_) => ProfileCompletionPage(
+                user: routeSettings.arguments is UserModel
+                    ? routeSettings.arguments as UserModel
+                    : null,
+                initialRole: UserRole.student,
+              ),
+            );
 
-          case Routes.instructorFormPage:
-            return MaterialPageRoute(builder: (_) => InstructorProfileSetupPage());
+            case Routes.instructorFormPage:
+            return MaterialPageRoute(
+              builder: (_) => ProfileCompletionPage(
+                user: routeSettings.arguments is UserModel
+                    ? routeSettings.arguments as UserModel
+                    : null,
+                initialRole: UserRole.instructor,
+              ),
+            );
 
           case Routes.parentFormPage:
-            // return MaterialPageRoute(builder: (_) => ParentFormPage());
+            return MaterialPageRoute(
+              builder: (_) => ProfileCompletionPage(
+                user: routeSettings.arguments is UserModel
+                    ? routeSettings.arguments as UserModel
+                    : null,
+                initialRole: UserRole.parent,
+              ),
+            );
 
           case Routes.homePage:
-            // return MaterialPageRoute(builder: (_) => HomePage());
+            return MaterialPageRoute(builder: (_) => const HomePage());
 
       default:
         return null;

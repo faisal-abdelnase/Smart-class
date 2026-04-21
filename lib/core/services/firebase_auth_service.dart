@@ -54,7 +54,20 @@ Future<bool> isEmailVerified() async {
       'name': name,
       'email': email,
       'role': role,
+      'phone': null,
+      'image': null,
+      'isProfileComplete': false,
+      'instructorData': null,
+      'studentData': null,
+      'parentData': null,
     });
+  }
+
+  Future<void> updateUserData({
+    required String uid,
+    required Map<String, dynamic> data,
+  }) async {
+    await _firestore.collection('users').doc(uid).set(data, SetOptions(merge: true));
   }
 
   Future<Map<String, dynamic>> getUserData(String uid) async {

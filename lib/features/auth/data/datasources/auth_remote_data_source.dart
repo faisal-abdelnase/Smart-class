@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/services/firebase_auth_service.dart';
+import '../../domain/entiyies/user_role.dart';
 import '../models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
@@ -55,7 +56,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       id: credential.user!.uid,
       name: name,
       email: email,
-      role: role,
+      role: UserRoleX.fromName(role),
     );
   }
 

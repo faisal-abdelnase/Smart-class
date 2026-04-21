@@ -6,6 +6,7 @@ import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
 import '../../../../core/utils/auth_dialogs.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../data/models/user_model.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/build_auth_row.dart';
 import '../widgets/build_background.dart';
@@ -98,7 +99,17 @@ class _LoginPageState extends State<LoginPage>
                   emailController.clear();
                   passwordController.clear();
 
-                  context.pushReplacementNamed(Routes.instructorFormPage);
+                  final user = state.user;
+                  if (user is UserModel && user.isProfileComplete) {
+                    context.pushReplacementNamed(Routes.homePage);
+                  } else if (user is UserModel) {
+                    context.pushReplacementNamed(
+                      Routes.profileCompletionPage,
+                      arguments: user,
+                    );
+                  } else {
+                    context.pushReplacementNamed(Routes.roleSelectionPage);
+                  }
               }
               },
               builder: (context, state) {

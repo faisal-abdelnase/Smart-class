@@ -19,11 +19,13 @@ class InfoItem {
 class InfoSection extends StatelessWidget {
   final String title;
   final List<InfoItem> items;
+  final VoidCallback? onEdit;
 
   const InfoSection({
     super.key,
     required this.title,
     required this.items,
+    this.onEdit,
   });
 
   @override
@@ -44,7 +46,8 @@ class InfoSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              TextButton(onPressed: () {}, child: const Text("Edit")),
+              if (onEdit != null)
+                TextButton(onPressed: onEdit, child: const Text("Edit")),
             ],
           ),
 

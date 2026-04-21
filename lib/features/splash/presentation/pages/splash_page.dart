@@ -8,8 +8,10 @@ import '../../../../core/di/service_locator.dart';
 import '../../../../core/localization/locale_cubit.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/services/hive_services.dart';
+import '../../../../core/services/firebase_auth_service.dart';
 import '../../../../core/theme/theme_cubit.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../auth/data/models/user_model.dart';
 import '../../../onboarding/domain/repositories/onboarding_repository.dart';
 
 class SplashPage extends StatefulWidget {
@@ -44,7 +46,7 @@ class _SplashPageState extends State<SplashPage>
 
     controller.forward();
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () async {
       if(!mounted) return;
 
 
@@ -66,12 +68,27 @@ class _SplashPageState extends State<SplashPage>
 
 
       final isFirst = sl<OnboardingRepository>().isFirstTime();
+      final firebaseService = sl<FirebaseService>();
+      final currentUser = firebaseService.currentUser;
 
       if (isFirst) {
         context.pushReplacementNamed(Routes.onboardingPage);
+      } else if (currentUser != null && currentUser.emailVerified) {
+        try {
+          final userMap = await firebaseService.getUserData(currentUser.uid);
+          final user = UserModel.fromJson(userMap, currentUser.uid);
+          if (!mounted) return;
+          context.pushReplacementNamed(
+            user.isProfileComplete ? Routes.homePage : Routes.profileCompletionPage,
+            arguments: user.isProfileComplete ? null : user,
+          );
+        } catch (_) {
+          if (!mounted) return;
+          context.pushReplacementNamed(Routes.roleSelectionPage);
+        }
       } else {
         context.pushReplacementNamed(Routes.roleSelectionPage);
-      } 
+      }
     });
   }
 

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
-
-enum UserRole { student, instructor, parent }
+import '../../domain/entiyies/user_role.dart';
 
 class RoleModel {
   final String title;

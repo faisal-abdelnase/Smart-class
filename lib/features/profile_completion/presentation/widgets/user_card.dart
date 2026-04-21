@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:smart_class/core/theme/app_colors.dart';
 
 class UserCard extends StatelessWidget {
-  const UserCard({super.key});
+  const UserCard({
+    super.key,
+    required this.name,
+    required this.role,
+    this.imagePath,
+  });
+
+  final String name;
+  final String role;
+  final String? imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +27,29 @@ class UserCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const CircleAvatar(radius: 28, child: Icon(Icons.person)),
+          CircleAvatar(
+            radius: 28,
+            backgroundImage: imagePath != null && imagePath!.isNotEmpty
+                ? AssetImage(imagePath!)
+                : null,
+            child: imagePath == null || imagePath!.isEmpty
+                ? const Icon(Icons.person)
+                : null,
+          ),
 
           const SizedBox(width: 12),
 
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Sarah Johnson",
+                Text(name,
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(height: 4),
-                Text("Instructor", style: TextStyle(color: Colors.blue)),
+                Text(role, style: const TextStyle(color: Colors.blue)),
               ],
             ),
           ),
-
-          TextButton(onPressed: () {}, child: const Text("Edit"))
         ],
       ),
     );

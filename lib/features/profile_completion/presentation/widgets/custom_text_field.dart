@@ -7,11 +7,12 @@ class CustomTextField extends StatelessWidget {
   final IconData? icon;
   final TextEditingController? controller;
   final int? maxLines;
+  final TextInputType? keyboardType;
 
   const CustomTextField({super.key, 
     required this.label,
     this.hint,
-    this.icon, this.controller, this.maxLines,
+    this.icon, this.controller, this.maxLines, this.keyboardType,
   });
 
   @override
@@ -32,6 +33,7 @@ class CustomTextField extends StatelessWidget {
         TextField(
           controller: controller,
           maxLines: maxLines ?? 1,
+          keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(color: hintColor),

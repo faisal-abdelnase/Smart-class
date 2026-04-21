@@ -5,7 +5,14 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
 
 class ProfileImage extends StatelessWidget {
-  const ProfileImage({super.key});
+  const ProfileImage({
+    super.key,
+    required this.selectedImage,
+    required this.onChanged,
+  });
+
+  final String selectedImage;
+  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,12 @@ class ProfileImage extends StatelessWidget {
               CircleAvatar(
                 radius: AppDimensions.avatarXL,
                 backgroundColor: t.surface,
-                child: Icon(Icons.camera_alt, color: iconColor),
+                backgroundImage: selectedImage.isNotEmpty
+                    ? AssetImage(selectedImage)
+                    : null,
+                child: selectedImage.isEmpty
+                    ? Icon(Icons.camera_alt, color: iconColor)
+                    : null,
               ),
               Positioned(
                 bottom: 0,
@@ -37,7 +49,27 @@ class ProfileImage extends StatelessWidget {
                 child: CircleAvatar(
                   radius: AppDimensions.avatarS,
                   backgroundColor: badgeColor,
-                  child: Icon(Icons.edit, size: 16, color: t.textInverse),
+                  child: PopupMenuButton<String>(
+                    padding: EdgeInsets.zero,
+                    tooltip: 'Choose avatar',
+                    onSelected: onChanged,
+                    itemBuilder: (context) => const [
+                      PopupMenuItem(value: '', child: Text('Use default')),
+                      PopupMenuItem(
+                        value: 'assets/images/onboarding1.png',
+                        child: Text('Avatar 1'),
+                      ),
+                      PopupMenuItem(
+                        value: 'assets/images/onboarding2.png',
+                        child: Text('Avatar 2'),
+                      ),
+                      PopupMenuItem(
+                        value: 'assets/images/onboarding3.png',
+                        child: Text('Avatar 3'),
+                      ),
+                    ],
+                    child: Icon(Icons.edit, size: 16, color: t.textInverse),
+                  ),
                 ),
               )
             ],

@@ -11,7 +11,9 @@ final class AuthLoading extends AuthState {}
 
 final class AuthSuccess extends AuthState {
   final AuthStatus status;
-  AuthSuccess(this.status);
+  final User? user;
+
+  AuthSuccess(this.status, {this.user});
 }
 
 final class AuthError extends AuthState {
