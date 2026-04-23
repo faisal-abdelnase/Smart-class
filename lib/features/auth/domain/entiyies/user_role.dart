@@ -43,3 +43,43 @@ extension LearningStyleX on LearningStyle {
     }
   }
 }
+
+enum EducationLevel { primary, preparatory, secondary, university }
+
+extension EducationLevelX on EducationLevel {
+  String get label {
+    switch (this) {
+      case EducationLevel.primary:
+        return 'Primary';
+      case EducationLevel.preparatory:
+        return 'Preparatory';
+      case EducationLevel.secondary:
+        return 'Secondary';
+      case EducationLevel.university:
+        return 'University';
+    }
+  }
+
+  String get arabicLabel {
+    switch (this) {
+      case EducationLevel.primary:
+        return 'ابتدائي';
+      case EducationLevel.preparatory:
+        return 'إعدادي';
+      case EducationLevel.secondary:
+        return 'ثانوي';
+      case EducationLevel.university:
+        return 'جامعة';
+    }
+  }
+
+  String get storageValue => name;
+
+  static EducationLevel? fromValue(String? value) {
+    if (value == null || value.isEmpty) return null;
+    for (final level in EducationLevel.values) {
+      if (level.name == value) return level;
+    }
+    return null;
+  }
+}

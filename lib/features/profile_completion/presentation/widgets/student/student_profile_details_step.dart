@@ -21,40 +21,42 @@ class StudentProfileDetailsStep extends StatelessWidget {
         children: [
           const HeaderSection(
             title: 'Student details',
-            subtitle: 'Help us recommend the right classes and study experience.',
-          ),
-          const SizedBox(height: 20),
-          CustomTextField(
-            label: 'Grade / Level',
-            hint: 'Grade 10 or Beginner',
-            icon: Icons.school_outlined,
-            controller: controller.studentGradeController,
-          ),
-          const SizedBox(height: 20),
-          CustomTextField(
-            label: 'Subjects interested in',
-            hint: 'Math, English, Biology',
-            icon: Icons.menu_book_outlined,
-            controller: controller.studentSubjectsController,
+            subtitle:
+                'Tell us where the student is studying so we can personalize the learning journey.',
           ),
           const SizedBox(height: 20),
           Text(
-            'Preferred learning style',
+            'Education level',
             style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(height: 12),
           Wrap(
             spacing: 12,
             runSpacing: 12,
-            children: LearningStyle.values
+            children: EducationLevel.values
                 .map(
-                  (style) => ChoiceChip(
-                    label: Text(style.label),
-                    selected: controller.learningStyle == style,
-                    onSelected: (_) => controller.updateLearningStyle(style),
+                  (level) => ChoiceChip(
+                    label: Text('${level.label} (${level.arabicLabel})'),
+                    selected: controller.studentEducationLevel == level,
+                    onSelected: (_) =>
+                        controller.updateStudentEducationLevel(level),
                   ),
                 )
                 .toList(),
+          ),
+          const SizedBox(height: 20),
+          CustomTextField(
+            label: 'School / University Name',
+            hint: 'Future Academy School',
+            icon: Icons.account_balance_outlined,
+            controller: controller.studentSchoolController,
+          ),
+          const SizedBox(height: 20),
+          CustomTextField(
+            label: 'Grade / Stage Details',
+            hint: 'Grade 5, Year 2, Level 1',
+            icon: Icons.school_outlined,
+            controller: controller.studentStageDetailsController,
           ),
         ],
       ),

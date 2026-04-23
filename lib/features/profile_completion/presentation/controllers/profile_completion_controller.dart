@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:smart_class/features/auth/data/models/user_model.dart';
 import 'package:smart_class/features/auth/domain/entiyies/user.dart';
@@ -15,41 +17,33 @@ class ProfileCompletionController extends ChangeNotifier {
               ? ''
               : user.instructorData!.pricePerHour.toString(),
         ),
-        bioController = TextEditingController(text: user.instructorData?.bio ?? ''),
-        studentGradeController = TextEditingController(
-          text: user.studentData?.gradeLevel ?? '',
+        bioController =
+            TextEditingController(text: user.instructorData?.bio ?? ''),
+        studentSchoolController = TextEditingController(
+          text: user.studentData?.schoolName ?? '',
         ),
-        studentSubjectsController = TextEditingController(
-          text: user.studentData?.interestedSubjects.join(', ') ?? '',
-        ),
-        parentChildrenCountController = TextEditingController(
-          text: user.parentData?.numberOfChildren == null ||
-                  user.parentData!.numberOfChildren == 0
-              ? ''
-              : user.parentData!.numberOfChildren.toString(),
-        ),
-        parentChildrenGradesController = TextEditingController(
-          text: user.parentData?.childrenGrades.join(', ') ?? '',
-        ),
-        parentPreferredSubjectsController = TextEditingController(
-          text: user.parentData?.preferredSubjects.join(', ') ?? '',
+        studentStageDetailsController = TextEditingController(
+          text: user.studentData?.stageDetails ?? '',
         ),
         experience = (user.instructorData?.experienceYears ?? 5).toDouble(),
-        learningStyle = user.studentData?.learningStyle ?? LearningStyle.online,
+        studentEducationLevel = user.studentData?.educationLevel,
         selectedImage = user.image ?? '',
-        certificates = List<String>.from(
-          user.instructorData?.certificates ?? const [],
-        ) {
+        certificateFiles = (user.instructorData?.certificates ?? const [])
+            .where((path) => path.trim().isNotEmpty)
+            .map((path) => File(path))
+            .toList(),
+        children = List<Child>.from(user.parentData?.children ?? const []) {
+    if (role == UserRole.parent && children.isEmpty) {
+      children.add(const Child(name: '', school: '', grade: ''));
+    }
+
     final controllers = [
       phoneController,
       instructorSubjectsController,
       priceController,
       bioController,
-      studentGradeController,
-      studentSubjectsController,
-      parentChildrenCountController,
-      parentChildrenGradesController,
-      parentPreferredSubjectsController,
+      studentSchoolController,
+      studentStageDetailsController,
     ];
 
     for (final controller in controllers) {
@@ -62,16 +56,14 @@ class ProfileCompletionController extends ChangeNotifier {
   final TextEditingController instructorSubjectsController;
   final TextEditingController priceController;
   final TextEditingController bioController;
-  final TextEditingController studentGradeController;
-  final TextEditingController studentSubjectsController;
-  final TextEditingController parentChildrenCountController;
-  final TextEditingController parentChildrenGradesController;
-  final TextEditingController parentPreferredSubjectsController;
-  final List<String> certificates;
+  final TextEditingController studentSchoolController;
+  final TextEditingController studentStageDetailsController;
+  final List<File> certificateFiles;
+  final List<Child> children;
 
   int currentStep = 0;
   double experience;
-  LearningStyle learningStyle;
+  EducationLevel? studentEducationLevel;
   String selectedImage;
 
   int get totalSteps => 3;
@@ -116,8 +108,9 @@ class ProfileCompletionController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateLearningStyle(LearningStyle value) {
-    learningStyle = value;
+  void updateStudentEducationLevel(EducationLevel? value) {
+    if (studentEducationLevel == value) return;
+    studentEducationLevel = value;
     notifyListeners();
   }
 
@@ -126,15 +119,35 @@ class ProfileCompletionController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addCertificate(String value) {
-    final normalized = value.trim();
-    if (normalized.isEmpty || certificates.contains(normalized)) return;
-    certificates.add(normalized);
+  void addCertificate(File file) {
+    final normalizedPath = file.path.trim();
+    if (normalizedPath.isEmpty ||
+        certificateFiles.any((item) => item.path == normalizedPath)) {
+      return;
+    }
+    certificateFiles.add(file);
     notifyListeners();
   }
 
-  void removeCertificate(String value) {
-    certificates.remove(value);
+  void removeCertificate(File file) {
+    certificateFiles.removeWhere((item) => item.path == file.path);
+    notifyListeners();
+  }
+
+  void addChild(Child child) {
+    children.add(child);
+    notifyListeners();
+  }
+
+  void removeChild(int index) {
+    if (index < 0 || index >= children.length) return;
+    children.removeAt(index);
+    notifyListeners();
+  }
+
+  void updateChild(int index, Child child) {
+    if (index < 0 || index >= children.length) return;
+    children[index] = child;
     notifyListeners();
   }
 
@@ -149,13 +162,11 @@ class ProfileCompletionController extends ChangeNotifier {
                 double.tryParse(priceController.text.trim()) != null &&
                 bioController.text.trim().isNotEmpty;
           case UserRole.student:
-            return studentGradeController.text.trim().isNotEmpty &&
-                studentSubjectsController.text.trim().isNotEmpty;
+            return studentEducationLevel != null &&
+                studentSchoolController.text.trim().isNotEmpty &&
+                studentStageDetailsController.text.trim().isNotEmpty;
           case UserRole.parent:
-            return int.tryParse(parentChildrenCountController.text.trim()) !=
-                    null &&
-                parentChildrenGradesController.text.trim().isNotEmpty &&
-                parentPreferredSubjectsController.text.trim().isNotEmpty;
+            return children.isNotEmpty && children.every(_isChildValid);
         }
       case 2:
         return true;
@@ -178,24 +189,28 @@ class ProfileCompletionController extends ChangeNotifier {
               subjects: _splitValues(instructorSubjectsController.text),
               experienceYears: experience.round(),
               pricePerHour: double.tryParse(priceController.text.trim()) ?? 0,
-              certificates: List<String>.from(certificates),
+              certificates: certificateFiles.map((file) => file.path).toList(),
               bio: bioController.text.trim(),
             )
           : null,
       studentData: role == UserRole.student
           ? StudentData(
-              gradeLevel: studentGradeController.text.trim(),
-              interestedSubjects: _splitValues(studentSubjectsController.text),
-              learningStyle: learningStyle,
+              educationLevel: studentEducationLevel,
+              schoolName: studentSchoolController.text.trim(),
+              stageDetails: studentStageDetailsController.text.trim(),
             )
           : null,
       parentData: role == UserRole.parent
           ? ParentData(
-              numberOfChildren:
-                  int.tryParse(parentChildrenCountController.text.trim()) ?? 0,
-              childrenGrades: _splitValues(parentChildrenGradesController.text),
-              preferredSubjects:
-                  _splitValues(parentPreferredSubjectsController.text),
+              children: children
+                  .map(
+                    (child) => Child(
+                      name: child.name.trim(),
+                      school: child.school.trim(),
+                      grade: child.grade.trim(),
+                    ),
+                  )
+                  .toList(),
             )
           : null,
     );
@@ -209,17 +224,20 @@ class ProfileCompletionController extends ChangeNotifier {
         .toList();
   }
 
+  bool _isChildValid(Child child) {
+    return child.name.trim().isNotEmpty &&
+        child.school.trim().isNotEmpty &&
+        child.grade.trim().isNotEmpty;
+  }
+
   @override
   void dispose() {
     phoneController.dispose();
     instructorSubjectsController.dispose();
     priceController.dispose();
     bioController.dispose();
-    studentGradeController.dispose();
-    studentSubjectsController.dispose();
-    parentChildrenCountController.dispose();
-    parentChildrenGradesController.dispose();
-    parentPreferredSubjectsController.dispose();
+    studentSchoolController.dispose();
+    studentStageDetailsController.dispose();
     super.dispose();
   }
 }

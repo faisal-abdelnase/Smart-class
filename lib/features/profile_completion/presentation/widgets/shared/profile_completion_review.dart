@@ -19,7 +19,8 @@ class ProfileCompletionReview extends StatelessWidget {
       key: ValueKey('${controller.role.name}-review'),
       child: Center(
         child: Container(
-          width: MediaQuery.of(context).size.width > 700 ? 700 : double.infinity,
+          width:
+              MediaQuery.of(context).size.width > 700 ? 700 : double.infinity,
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
@@ -86,27 +87,31 @@ List<InfoItem> _buildRoleItems(ProfileCompletionController controller) {
         InfoItem(
           icon: Icons.badge_outlined,
           title: 'Certificates',
-          value: controller.certificates.isEmpty
+          value: controller.certificateFiles.isEmpty
               ? 'Not added yet'
-              : controller.certificates.join(', '),
+              : controller.certificateFiles
+                  .map((file) => file.path.split(r'\').last)
+                  .join(', '),
         ),
       ];
     case UserRole.student:
       return [
         InfoItem(
           icon: Icons.school_outlined,
-          title: 'Grade / Level',
-          value: controller.studentGradeController.text.trim(),
+          title: 'Education Level',
+          value: controller.studentEducationLevel == null
+              ? 'Not selected'
+              : '${controller.studentEducationLevel!.label} (${controller.studentEducationLevel!.arabicLabel})',
         ),
         InfoItem(
-          icon: Icons.menu_book_outlined,
-          title: 'Subjects',
-          value: controller.studentSubjectsController.text.trim(),
+          icon: Icons.account_balance_outlined,
+          title: 'School / University',
+          value: controller.studentSchoolController.text.trim(),
         ),
         InfoItem(
-          icon: Icons.laptop_chromebook_outlined,
-          title: 'Learning Style',
-          value: controller.learningStyle.label,
+          icon: Icons.layers_outlined,
+          title: 'Stage Details',
+          value: controller.studentStageDetailsController.text.trim(),
         ),
       ];
     case UserRole.parent:
@@ -114,17 +119,12 @@ List<InfoItem> _buildRoleItems(ProfileCompletionController controller) {
         InfoItem(
           icon: Icons.family_restroom_outlined,
           title: 'Children',
-          value: controller.parentChildrenCountController.text.trim(),
-        ),
-        InfoItem(
-          icon: Icons.school_outlined,
-          title: 'Children Grades',
-          value: controller.parentChildrenGradesController.text.trim(),
-        ),
-        InfoItem(
-          icon: Icons.menu_book_outlined,
-          title: 'Preferred Subjects',
-          value: controller.parentPreferredSubjectsController.text.trim(),
+          value: controller.children
+              .map(
+                (child) =>
+                    '${child.name.trim().isEmpty ? 'Unnamed child' : child.name.trim()} - ${child.school.trim().isEmpty ? 'No school' : child.school.trim()} - ${child.grade.trim().isEmpty ? 'No grade' : child.grade.trim()}',
+              )
+              .join(' | '),
         ),
       ];
   }

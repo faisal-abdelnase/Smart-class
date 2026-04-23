@@ -85,26 +85,48 @@ InstructorData? _instructorFromJson(dynamic value) {
 StudentData? _studentFromJson(dynamic value) {
   if (value is! Map<String, dynamic>) return null;
   return StudentData(
-    gradeLevel: value['gradeLevel'] as String? ?? '',
-    interestedSubjects: List<String>.from(
-      value['interestedSubjects'] as List? ?? const [],
+    educationLevel: EducationLevelX.fromValue(
+      value['educationLevel'] as String?,
     ),
-    learningStyle: value['learningStyle'] == LearningStyle.offline.name
-        ? LearningStyle.offline
-        : LearningStyle.online,
+    schoolName: value['schoolName'] as String? ?? '',
+    stageDetails: value['stageDetails'] as String? ??
+        value['gradeLevel'] as String? ??
+        '',
   );
 }
 
 ParentData? _parentFromJson(dynamic value) {
   if (value is! Map<String, dynamic>) return null;
+  final rawChildren = value['children'];
+
+  if (rawChildren is List) {
+    return ParentData(
+      children: rawChildren
+          .whereType<Map>()
+          .map(
+            (child) => Child(
+              name: child['name'] as String? ?? '',
+              school: child['school'] as String? ?? '',
+              grade: child['grade'] as String? ?? '',
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  final legacyGrades = List<String>.from(
+    value['childrenGrades'] as List? ?? const [],
+  );
   return ParentData(
-    numberOfChildren: value['numberOfChildren'] as int? ?? 0,
-    childrenGrades: List<String>.from(
-      value['childrenGrades'] as List? ?? const [],
-    ),
-    preferredSubjects: List<String>.from(
-      value['preferredSubjects'] as List? ?? const [],
-    ),
+    children: legacyGrades
+        .map(
+          (grade) => Child(
+            name: '',
+            school: '',
+            grade: grade,
+          ),
+        )
+        .toList(),
   );
 }
 
@@ -122,17 +144,23 @@ Map<String, dynamic>? _instructorToJson(InstructorData? value) {
 Map<String, dynamic>? _studentToJson(StudentData? value) {
   if (value == null) return null;
   return {
-    'gradeLevel': value.gradeLevel,
-    'interestedSubjects': value.interestedSubjects,
-    'learningStyle': value.learningStyle.name,
+    'educationLevel': value.educationLevel?.storageValue,
+    'schoolName': value.schoolName,
+    'stageDetails': value.stageDetails,
   };
 }
 
 Map<String, dynamic>? _parentToJson(ParentData? value) {
   if (value == null) return null;
   return {
-    'numberOfChildren': value.numberOfChildren,
-    'childrenGrades': value.childrenGrades,
-    'preferredSubjects': value.preferredSubjects,
+    'children': value.children
+        .map(
+          (child) => {
+            'name': child.name,
+            'school': child.school,
+            'grade': child.grade,
+          },
+        )
+        .toList(),
   };
 }

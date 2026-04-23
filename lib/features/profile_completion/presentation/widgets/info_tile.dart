@@ -12,14 +12,24 @@ class InfoTile extends StatelessWidget {
     return Column(
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(item.icon, size: 20),
             const SizedBox(width: 10),
             Expanded(
+              flex: 2,
               child: Text(item.title,
                   style: const TextStyle(color: Colors.grey)),
             ),
-            Text(item.value),
+            Expanded(
+              flex: 3,
+              child: Text(
+                item.value,
+                textAlign: TextAlign.end,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+            ),
           ],
         ),
         const Divider(height: 20, thickness: 1, color: AppColors.lightBorder),

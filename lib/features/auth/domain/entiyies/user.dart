@@ -43,25 +43,33 @@ class InstructorData {
 }
 
 class StudentData {
-  final String gradeLevel;
-  final List<String> interestedSubjects;
-  final LearningStyle learningStyle;
+  final EducationLevel? educationLevel;
+  final String schoolName;
+  final String stageDetails;
 
   const StudentData({
-    required this.gradeLevel,
-    required this.interestedSubjects,
-    required this.learningStyle,
+    required this.educationLevel,
+    required this.schoolName,
+    required this.stageDetails,
   });
 }
 
 class ParentData {
-  final int numberOfChildren;
-  final List<String> childrenGrades;
-  final List<String> preferredSubjects;
+  final List<Child> children;
 
   const ParentData({
-    required this.numberOfChildren,
-    required this.childrenGrades,
-    required this.preferredSubjects,
+    required this.children,
+  });
+}
+
+class Child {
+  final String name;
+  final String school;
+  final String grade;
+
+  const Child({
+    required this.name,
+    required this.school,
+    required this.grade,
   });
 }
