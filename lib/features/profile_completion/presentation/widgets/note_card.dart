@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
@@ -24,7 +25,7 @@ class NoteCard extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              "Instructor Verification\nYou'll be asked to provide credentials in step 3.",
+              context.tr('instructor_verification_note'),
               style: AppTypography.bodyMedium.copyWith(color: textColor),
             ),
           )

@@ -4,6 +4,7 @@ import '../../../../core/theme/app_colors.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final String? hint;
+  final String? errorText;
   final IconData? icon;
   final TextEditingController? controller;
   final int? maxLines;
@@ -12,7 +13,11 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({super.key, 
     required this.label,
     this.hint,
-    this.icon, this.controller, this.maxLines, this.keyboardType,
+    this.errorText,
+    this.icon,
+    this.controller,
+    this.maxLines,
+    this.keyboardType,
   });
 
   @override
@@ -36,6 +41,7 @@ class CustomTextField extends StatelessWidget {
           keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hint,
+            errorText: errorText,
             hintStyle: TextStyle(color: hintColor),
             prefixIcon: icon != null ? Icon(icon, color: iconColor) : null,
             filled: true,

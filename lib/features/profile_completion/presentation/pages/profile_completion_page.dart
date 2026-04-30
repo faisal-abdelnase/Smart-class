@@ -69,11 +69,11 @@ class _ProfileCompletionPageState extends State<ProfileCompletionPage> {
         data: updatedUser.toJson(),
       );
       if (!mounted) return;
-      showSuccessSnackBar(context, 'Profile completed successfully');
+      showSuccessSnackBar(context, context.tr('profile_completed_successfully'));
       context.pushReplacementNamed(Routes.homePage);
     } catch (_) {
       if (!mounted) return;
-      showErrorSnackBar(context, 'Unable to save profile right now');
+      showErrorSnackBar(context, context.tr('unable_to_save_profile'));
     } finally {
       if (mounted) {
         setState(() => isSubmitting = false);
@@ -124,7 +124,7 @@ class _ProfileCompletionPageState extends State<ProfileCompletionPage> {
         return ProfileCompletionShell(
           progress: controller.progress,
           step: controller.currentStep,
-          stepTitle: controller.stepTitle,
+          stepTitle: controller.stepTitle(context),
           currentStep: controller.currentStep,
           onNext: _handleNext,
           onBack: controller.previousStep,

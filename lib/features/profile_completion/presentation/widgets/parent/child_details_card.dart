@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
+import 'package:smart_class/features/profile_completion/presentation/helpers/profile_completion_localization.dart';
 import 'package:smart_class/features/auth/domain/entiyies/user.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/custom_text_field.dart';
 
@@ -79,7 +81,7 @@ class _ChildDetailsCardState extends State<ChildDetailsCard> {
               children: [
                 Expanded(
                   child: Text(
-                    'Child ${widget.index + 1}',
+                    getLocalizedChildTitle(context, widget.index),
                     style: theme.textTheme.titleMedium,
                   ),
                 ),
@@ -87,28 +89,41 @@ class _ChildDetailsCardState extends State<ChildDetailsCard> {
                   IconButton(
                     onPressed: widget.onRemove,
                     icon: const Icon(Icons.delete_outline),
-                    tooltip: 'Remove child',
+                    tooltip: context.tr('remove_child'),
                   ),
               ],
             ),
             const SizedBox(height: 12),
             CustomTextField(
-              label: 'Child Name',
-              hint: 'Sara Ahmed',
+              label: context.tr('child_name'),
+              hint: context.tr('child_name_hint'),
+              errorText: context.trOrNull(
+                widget.child.name.trim().isEmpty ? 'child_name_required' : null,
+              ),
               icon: Icons.person_outline,
               controller: nameController,
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              label: 'School Name',
-              hint: 'Al Rowad School',
+              label: context.tr('school_name'),
+              hint: context.tr('school_name_hint'),
+              errorText: context.trOrNull(
+                widget.child.school.trim().isEmpty
+                    ? 'child_school_required'
+                    : null,
+              ),
               icon: Icons.account_balance_outlined,
               controller: schoolController,
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              label: 'Stage / Grade',
-              hint: 'Grade 4',
+              label: context.tr('stage_grade'),
+              hint: context.tr('stage_grade_hint'),
+              errorText: context.trOrNull(
+                widget.child.grade.trim().isEmpty
+                    ? 'child_grade_required'
+                    : null,
+              ),
               icon: Icons.school_outlined,
               controller: gradeController,
             ),

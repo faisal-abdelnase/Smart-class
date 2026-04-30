@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
+import 'package:smart_class/features/profile_completion/presentation/helpers/profile_completion_localization.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -23,8 +25,14 @@ class ExperienceSlider extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Years of Experience", style: AppTypography.labelLarge.copyWith(color: titleColor)),
-            Text("${value == 20 ? '20+' : '${value.round()}'} years", style: AppTypography.labelLarge.copyWith(color: AppColors.primary)),
+            Text(
+              context.tr('years_of_experience'),
+              style: AppTypography.labelLarge.copyWith(color: titleColor),
+            ),
+            Text(
+              getLocalizedExperienceValue(context, value),
+              style: AppTypography.labelLarge.copyWith(color: AppColors.primary),
+            ),
           ],
         ),
         Slider(

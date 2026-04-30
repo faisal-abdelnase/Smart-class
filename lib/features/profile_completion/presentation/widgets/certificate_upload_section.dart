@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import 'package:smart_class/core/theme/app_dimension.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -29,7 +30,7 @@ class CertificateUploadSection extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "Certificates",
+            context.tr('certificates'),
             style: AppTypography.labelLarge.copyWith(color: titleColor),
           ),
         ),
@@ -46,10 +47,10 @@ class CertificateUploadSection extends StatelessWidget {
               border: Border.all(color: Colors.white24),
             ),
             child: Column(
-              children: const [
-                Icon(Icons.upload_file, size: 40),
-                SizedBox(height: 8),
-                Text("Upload Certificate (PDF / Image)"),
+              children: [
+                const Icon(Icons.upload_file, size: 40),
+                const SizedBox(height: 8),
+                Text(context.tr('upload_certificate_formats')),
               ],
             ),
           ),

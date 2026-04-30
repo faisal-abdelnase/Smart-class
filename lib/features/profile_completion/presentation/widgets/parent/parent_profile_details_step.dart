@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import 'package:smart_class/features/auth/domain/entiyies/user.dart';
 import 'package:smart_class/features/profile_completion/presentation/controllers/profile_completion_controller.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/header_section.dart';
@@ -36,24 +37,23 @@ class _ParentProfileDetailsStepState extends State<ParentProfileDetailsStep> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HeaderSection(
-            title: 'Parent details',
-            subtitle:
-                'Add each child so we can tailor recommendations with more accuracy.',
+          HeaderSection(
+            title: context.tr('parent_details'),
+            subtitle: context.tr('parent_details_subtitle'),
           ),
           const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
                 child: Text(
-                  'Children details',
+                  context.tr('children_details'),
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
               FilledButton.icon(
                 onPressed: _handleAddChild,
                 icon: const Icon(Icons.add),
-                label: const Text('Add Child'),
+                label: Text(context.tr('add_child')),
               ),
             ],
           ),
@@ -137,12 +137,12 @@ class _EmptyChildrenState extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'No children added yet',
+            context.tr('no_children_added_yet'),
             style: theme.textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
           Text(
-            'Start by adding the first child profile.',
+            context.tr('start_by_adding_first_child_profile'),
             style: theme.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
@@ -150,7 +150,7 @@ class _EmptyChildrenState extends StatelessWidget {
           OutlinedButton.icon(
             onPressed: onAddChild,
             icon: const Icon(Icons.add),
-            label: const Text('Add Child'),
+            label: Text(context.tr('add_child')),
           ),
         ],
       ),

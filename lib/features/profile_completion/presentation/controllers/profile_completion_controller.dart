@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_class/features/auth/data/models/user_model.dart';
 import 'package:smart_class/features/auth/domain/entiyies/user.dart';
 import 'package:smart_class/features/auth/domain/entiyies/user_role.dart';
+import 'package:smart_class/features/profile_completion/presentation/helpers/profile_completion_localization.dart';
 
 class ProfileCompletionController extends ChangeNotifier {
   ProfileCompletionController(this.user)
@@ -72,18 +73,47 @@ class ProfileCompletionController extends ChangeNotifier {
   bool get isLastStep => currentStep == totalSteps - 1;
   bool get canContinue => isStepValid(currentStep);
 
-  String get stepTitle {
-    switch (currentStep) {
-      case 0:
-        return 'Basic Info';
-      case 1:
-        return '${role.label} Details';
-      case 2:
-        return 'Review';
-      default:
-        return 'Profile';
-    }
+  String stepTitle(BuildContext context) {
+    return getProfileCompletionStepTitle(context, currentStep, role);
   }
+
+  String? get phoneErrorKey =>
+      phoneController.text.trim().isEmpty ? 'phone_required' : null;
+
+  String? get instructorSubjectsErrorKey =>
+      instructorSubjectsController.text.trim().isEmpty
+      ? 'subjects_required'
+      : null;
+
+  String? get priceErrorKey {
+    final price = priceController.text.trim();
+    if (price.isEmpty) return 'price_required';
+    if (double.tryParse(price) == null) return 'price_invalid';
+    return null;
+  }
+
+  String? get bioErrorKey =>
+      bioController.text.trim().isEmpty ? 'bio_required' : null;
+
+  String? get studentEducationLevelErrorKey =>
+      studentEducationLevel == null ? 'education_level_required' : null;
+
+  String? get studentSchoolErrorKey =>
+      studentSchoolController.text.trim().isEmpty ? 'school_name_required' : null;
+
+  String? get studentStageDetailsErrorKey =>
+      studentStageDetailsController.text.trim().isEmpty
+      ? 'stage_details_required'
+      : null;
+
+  String? childNameErrorKey(Child child) =>
+      child.name.trim().isEmpty ? 'child_name_required' : null;
+
+  String? childSchoolErrorKey(Child child) =>
+      child.school.trim().isEmpty ? 'child_school_required' : null;
+
+  String? childGradeErrorKey(Child child) =>
+      child.grade.trim().isEmpty ? 'child_grade_required' : null;
 
   void nextStep() {
     if (!canContinue || isLastStep) return;
@@ -154,17 +184,17 @@ class ProfileCompletionController extends ChangeNotifier {
   bool isStepValid(int step) {
     switch (step) {
       case 0:
-        return phoneController.text.trim().isNotEmpty;
+        return phoneErrorKey == null;
       case 1:
         switch (role) {
           case UserRole.instructor:
-            return instructorSubjectsController.text.trim().isNotEmpty &&
-                double.tryParse(priceController.text.trim()) != null &&
-                bioController.text.trim().isNotEmpty;
+            return instructorSubjectsErrorKey == null &&
+                priceErrorKey == null &&
+                bioErrorKey == null;
           case UserRole.student:
-            return studentEducationLevel != null &&
-                studentSchoolController.text.trim().isNotEmpty &&
-                studentStageDetailsController.text.trim().isNotEmpty;
+            return studentEducationLevelErrorKey == null &&
+                studentSchoolErrorKey == null &&
+                studentStageDetailsErrorKey == null;
           case UserRole.parent:
             return children.isNotEmpty && children.every(_isChildValid);
         }

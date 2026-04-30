@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import 'info_tile.dart';
@@ -47,7 +48,10 @@ class InfoSection extends StatelessWidget {
             children: [
               Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
               if (onEdit != null)
-                TextButton(onPressed: onEdit, child: const Text("Edit")),
+                TextButton(
+                  onPressed: onEdit,
+                  child: Text(context.tr('edit')),
+                ),
             ],
           ),
 

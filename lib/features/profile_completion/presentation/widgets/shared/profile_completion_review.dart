@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import 'package:smart_class/features/auth/domain/entiyies/user_role.dart';
 import 'package:smart_class/features/profile_completion/presentation/controllers/profile_completion_controller.dart';
+import 'package:smart_class/features/profile_completion/presentation/helpers/profile_completion_localization.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/header_section.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/info_section.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/user_card.dart';
@@ -22,30 +24,34 @@ class ProfileCompletionReview extends StatelessWidget {
           width:
               MediaQuery.of(context).size.width > 700 ? 700 : double.infinity,
           padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              const HeaderSection(
-                title: 'Review your profile',
-                subtitle: 'Double-check your details before finishing setup.',
+            child: Column(
+              children: [
+              HeaderSection(
+                title: context.tr('review_your_profile'),
+                subtitle: context.tr('review_your_profile_subtitle'),
               ),
               const SizedBox(height: 20),
               UserCard(
-                name: controller.user.name,
-                role: controller.role.label,
+                name:
+                    controller.user.name.trim().isEmpty ||
+                        controller.user.name == controller.role.label
+                    ? getLocalizedUserRole(context, controller.role)
+                    : controller.user.name,
+                role: getLocalizedUserRole(context, controller.role),
                 imagePath: controller.selectedImage,
               ),
               const SizedBox(height: 20),
               InfoSection(
-                title: 'Personal Info',
+                title: context.tr('personal_info'),
                 items: [
                   InfoItem(
                     icon: Icons.email,
-                    title: 'Email',
+                    title: context.tr('email_address'),
                     value: controller.user.email,
                   ),
                   InfoItem(
                     icon: Icons.phone,
-                    title: 'Phone',
+                    title: context.tr('phone'),
                     value: controller.phoneController.text.trim(),
                   ),
                 ],
@@ -53,8 +59,8 @@ class ProfileCompletionReview extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               InfoSection(
-                title: '${controller.role.label} Details',
-                items: _buildRoleItems(controller),
+                title: getLocalizedRoleDetailsTitle(context, controller.role),
+                items: _buildRoleItems(context, controller),
                 onEdit: () => controller.jumpToStep(1),
               ),
             ],
@@ -65,30 +71,33 @@ class ProfileCompletionReview extends StatelessWidget {
   }
 }
 
-List<InfoItem> _buildRoleItems(ProfileCompletionController controller) {
+List<InfoItem> _buildRoleItems(
+  BuildContext context,
+  ProfileCompletionController controller,
+) {
   switch (controller.role) {
     case UserRole.instructor:
       return [
         InfoItem(
           icon: Icons.book_outlined,
-          title: 'Subjects',
+          title: context.tr('subjects'),
           value: controller.instructorSubjectsController.text.trim(),
         ),
         InfoItem(
           icon: Icons.timer_outlined,
-          title: 'Experience',
-          value: '${controller.experience.round()} years',
+          title: context.tr('experience'),
+          value: getLocalizedExperienceValue(context, controller.experience),
         ),
         InfoItem(
           icon: Icons.attach_money,
-          title: 'Price',
+          title: context.tr('price'),
           value: controller.priceController.text.trim(),
         ),
         InfoItem(
           icon: Icons.badge_outlined,
-          title: 'Certificates',
+          title: context.tr('certificates'),
           value: controller.certificateFiles.isEmpty
-              ? 'Not added yet'
+              ? context.tr('not_added_yet')
               : controller.certificateFiles
                   .map((file) => file.path.split(r'\').last)
                   .join(', '),
@@ -98,19 +107,22 @@ List<InfoItem> _buildRoleItems(ProfileCompletionController controller) {
       return [
         InfoItem(
           icon: Icons.school_outlined,
-          title: 'Education Level',
+          title: context.tr('education_level'),
           value: controller.studentEducationLevel == null
-              ? 'Not selected'
-              : '${controller.studentEducationLevel!.label} (${controller.studentEducationLevel!.arabicLabel})',
+              ? context.tr('not_selected')
+              : getLocalizedEducationLevel(
+                  context,
+                  controller.studentEducationLevel!,
+                ),
         ),
         InfoItem(
           icon: Icons.account_balance_outlined,
-          title: 'School / University',
+          title: context.tr('school_university'),
           value: controller.studentSchoolController.text.trim(),
         ),
         InfoItem(
           icon: Icons.layers_outlined,
-          title: 'Stage Details',
+          title: context.tr('stage_details'),
           value: controller.studentStageDetailsController.text.trim(),
         ),
       ];
@@ -118,13 +130,8 @@ List<InfoItem> _buildRoleItems(ProfileCompletionController controller) {
       return [
         InfoItem(
           icon: Icons.family_restroom_outlined,
-          title: 'Children',
-          value: controller.children
-              .map(
-                (child) =>
-                    '${child.name.trim().isEmpty ? 'Unnamed child' : child.name.trim()} - ${child.school.trim().isEmpty ? 'No school' : child.school.trim()} - ${child.grade.trim().isEmpty ? 'No grade' : child.grade.trim()}',
-              )
-              .join(' | '),
+          title: context.tr('children'),
+          value: getLocalizedChildrenSummary(context, controller.children),
         ),
       ];
   }

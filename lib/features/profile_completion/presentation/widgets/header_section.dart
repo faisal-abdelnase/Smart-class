@@ -7,8 +7,8 @@ import '../../../../core/theme/app_colors.dart';
 class HeaderSection extends StatelessWidget {
   const HeaderSection({
     super.key,
-    this.title = "Let's set up your profile",
-    this.subtitle = "Tell us a bit about yourself so we can personalize your experience as an instructor.",
+    required this.title,
+    required this.subtitle,
   });
 
   final String title;

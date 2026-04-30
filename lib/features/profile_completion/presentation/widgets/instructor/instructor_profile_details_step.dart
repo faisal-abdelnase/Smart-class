@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import 'package:smart_class/features/profile_completion/presentation/controllers/profile_completion_controller.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/certificate_upload_section.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/custom_text_field.dart';
@@ -20,15 +21,15 @@ class InstructorProfileDetailsStep extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HeaderSection(
-            title: 'Instructor details',
-            subtitle:
-                'Add your subjects, experience, pricing, and teaching highlights.',
+          HeaderSection(
+            title: context.tr('instructor_details'),
+            subtitle: context.tr('instructor_details_subtitle'),
           ),
           const SizedBox(height: 20),
           CustomTextField(
-            label: 'Subjects',
-            hint: 'Math, Science, Physics',
+            label: context.tr('subjects'),
+            hint: context.tr('subjects_hint'),
+            errorText: context.trOrNull(controller.instructorSubjectsErrorKey),
             icon: Icons.menu_book_outlined,
             controller: controller.instructorSubjectsController,
           ),
@@ -39,16 +40,18 @@ class InstructorProfileDetailsStep extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           CustomTextField(
-            label: 'Price per hour',
-            hint: '20',
+            label: context.tr('price_per_hour'),
+            hint: context.tr('price_per_hour_hint'),
+            errorText: context.trOrNull(controller.priceErrorKey),
             icon: Icons.attach_money,
             controller: controller.priceController,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
           ),
           const SizedBox(height: 20),
           CustomTextField(
-            label: 'Bio',
-            hint: 'Tell learners about your teaching style',
+            label: context.tr('bio'),
+            hint: context.tr('bio_hint'),
+            errorText: context.trOrNull(controller.bioErrorKey),
             icon: Icons.person_outline,
             controller: controller.bioController,
             maxLines: 4,

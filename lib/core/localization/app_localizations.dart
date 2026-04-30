@@ -15,6 +15,9 @@ class AppLocalizations {
   Future load() async {
     String jsonString =
         await rootBundle.loadString('assets/lang/${locale.languageCode}.json');
+    if (jsonString.startsWith('\ufeff')) {
+      jsonString = jsonString.substring(1);
+    }
 
     Map<String, dynamic> jsonMap = json.decode(jsonString);
 
@@ -22,7 +25,15 @@ class AppLocalizations {
         jsonMap.map((key, value) => MapEntry(key, value.toString()));
   }
 
-  String translate(String key) {
-    return _localizedStrings[key] ?? key;
+  String translate(String key, {Map<String, String>? params}) {
+    var value = _localizedStrings[key] ?? key;
+
+    if (params != null) {
+      for (final entry in params.entries) {
+        value = value.replaceAll('{${entry.key}}', entry.value);
+      }
+    }
+
+    return value;
   }
 }

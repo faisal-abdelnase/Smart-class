@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({
@@ -25,7 +26,7 @@ class BottomBar extends StatelessWidget {
           if (currentStep > 0)
             TextButton(
               onPressed: onBack,
-              child: const Text("Back"),
+              child: Text(context.tr('back')),
             ),
           const Spacer(),
           ElevatedButton(
@@ -42,7 +43,11 @@ class BottomBar extends StatelessWidget {
                     height: 18,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                : Text(currentStep == 2 ? "Finish" : "Continue"),
+                : Text(
+                    context.tr(
+                      currentStep == 2 ? 'complete_profile' : 'continue',
+                    ),
+                  ),
           )
         ],
       ),

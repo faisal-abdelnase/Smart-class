@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import 'package:smart_class/core/theme/app_dimension.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -38,7 +39,16 @@ class ProgressBar  extends StatelessWidget {
         const SizedBox(height: AppDimensions.sp1),
         Align(
           alignment: Alignment.centerRight,
-          child: Text("Step ${step + 1} of 3", style: AppTypography.labelMedium.copyWith(color: captionColor)),
+          child: Text(
+            context.tr(
+              'profile_completion_step_counter',
+              {
+                'current': '${step + 1}',
+                'total': '3',
+              },
+            ),
+            style: AppTypography.labelMedium.copyWith(color: captionColor),
+          ),
         )
       ],
     );

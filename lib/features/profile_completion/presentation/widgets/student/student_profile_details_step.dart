@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:smart_class/features/auth/domain/entiyies/user_role.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import 'package:smart_class/features/profile_completion/presentation/controllers/profile_completion_controller.dart';
+import 'package:smart_class/features/profile_completion/presentation/helpers/profile_completion_localization.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/custom_text_field.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/header_section.dart';
+
+import '../../../../auth/domain/entiyies/user_role.dart';
 
 class StudentProfileDetailsStep extends StatelessWidget {
   const StudentProfileDetailsStep({
@@ -19,16 +22,24 @@ class StudentProfileDetailsStep extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HeaderSection(
-            title: 'Student details',
-            subtitle:
-                'Tell us where the student is studying so we can personalize the learning journey.',
+          HeaderSection(
+            title: context.tr('student_details'),
+            subtitle: context.tr('student_details_subtitle'),
           ),
           const SizedBox(height: 20),
           Text(
-            'Education level',
+            context.tr('education_level'),
             style: Theme.of(context).textTheme.titleSmall,
           ),
+          if (controller.studentEducationLevelErrorKey != null) ...[
+            const SizedBox(height: 8),
+            Text(
+              context.tr(controller.studentEducationLevelErrorKey!),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ],
           const SizedBox(height: 12),
           Wrap(
             spacing: 12,
@@ -36,7 +47,7 @@ class StudentProfileDetailsStep extends StatelessWidget {
             children: EducationLevel.values
                 .map(
                   (level) => ChoiceChip(
-                    label: Text('${level.label} (${level.arabicLabel})'),
+                    label: Text(getLocalizedEducationLevel(context, level)),
                     selected: controller.studentEducationLevel == level,
                     onSelected: (_) =>
                         controller.updateStudentEducationLevel(level),
@@ -46,15 +57,17 @@ class StudentProfileDetailsStep extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           CustomTextField(
-            label: 'School / University Name',
-            hint: 'Future Academy School',
+            label: context.tr('school_university_name'),
+            hint: context.tr('school_university_hint'),
+            errorText: context.trOrNull(controller.studentSchoolErrorKey),
             icon: Icons.account_balance_outlined,
             controller: controller.studentSchoolController,
           ),
           const SizedBox(height: 20),
           CustomTextField(
-            label: 'Grade / Stage Details',
-            hint: 'Grade 5, Year 2, Level 1',
+            label: context.tr('grade_stage_details'),
+            hint: context.tr('grade_stage_details_hint'),
+            errorText: context.trOrNull(controller.studentStageDetailsErrorKey),
             icon: Icons.school_outlined,
             controller: controller.studentStageDetailsController,
           ),

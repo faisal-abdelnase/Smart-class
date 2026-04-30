@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/theme/app_dimension.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
@@ -26,9 +27,12 @@ class ProfileImage extends StatelessWidget {
       child: Column(
         children: [
 
-          Text("Upload Photo", 
-          style: Theme.of(context).textTheme.labelLarge!.copyWith(
-            color: isDarkMode ? AppColors.darkText1 : AppColors.lightText1)),
+          Text(
+            context.tr('upload_photo'),
+            style: Theme.of(context).textTheme.labelLarge!.copyWith(
+              color: isDarkMode ? AppColors.darkText1 : AppColors.lightText1,
+            ),
+          ),
 
           SizedBox(height: AppDimensions.sp2),
           Stack(
@@ -51,21 +55,24 @@ class ProfileImage extends StatelessWidget {
                   backgroundColor: badgeColor,
                   child: PopupMenuButton<String>(
                     padding: EdgeInsets.zero,
-                    tooltip: 'Choose avatar',
+                    tooltip: context.tr('choose_avatar'),
                     onSelected: onChanged,
-                    itemBuilder: (context) => const [
-                      PopupMenuItem(value: '', child: Text('Use default')),
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        value: '',
+                        child: Text(context.tr('use_default_avatar')),
+                      ),
                       PopupMenuItem(
                         value: 'assets/images/onboarding1.png',
-                        child: Text('Avatar 1'),
+                        child: Text(context.tr('avatar_1')),
                       ),
                       PopupMenuItem(
                         value: 'assets/images/onboarding2.png',
-                        child: Text('Avatar 2'),
+                        child: Text(context.tr('avatar_2')),
                       ),
                       PopupMenuItem(
                         value: 'assets/images/onboarding3.png',
-                        child: Text('Avatar 3'),
+                        child: Text(context.tr('avatar_3')),
                       ),
                     ],
                     child: Icon(Icons.edit, size: 16, color: t.textInverse),
