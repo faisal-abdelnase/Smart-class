@@ -25,7 +25,7 @@ class StatCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey[300]!),
-        // boxShadow: AppShadows.lg
+        
       ),
       child: AppScreenPadding(
         vertical: true,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/responsive/app_responsive.dart';
 import '../../../../core/theme/app_dimension.dart';
-import 'posts_section.dart';
+import 'recent_announcements_card.dart';
 import 'schedule_section.dart';
 import 'stats_section.dart';
 import 'user_info_tile.dart';
@@ -17,12 +17,23 @@ class DashboardBody extends StatelessWidget {
     if (r.isDesktop) {
       return Padding(
         padding: r.screenPadding,
-        child: Row(
-          children: const [
-            Expanded(flex: 2, child: _LeftSide()),
-            SizedBox(width: 20),
-            Expanded(child: ScheduleSection()),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: AppDimensions.sp4),
+              UserInfoTile(),
+              SizedBox(height: AppDimensions.sp4),
+              StatsSection(),
+              SizedBox(height: AppDimensions.sp4),
+              Row(
+                children:  [
+                  Expanded(flex: 2, child: RecentAnnouncementsCard()),
+                  SizedBox(width: AppDimensions.sp4),
+                  Expanded(flex: 1, child: ScheduleSection()),
+                ],
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -36,29 +47,11 @@ class DashboardBody extends StatelessWidget {
           SizedBox(height: AppDimensions.sp4),
           StatsSection(),
           SizedBox(height: AppDimensions.sp4),
-          PostsSection(),
+          RecentAnnouncementsCard(),
           SizedBox(height: AppDimensions.sp4),
           ScheduleSection(),
         ],
       ),
-    );
-  }
-}
-
-class _LeftSide extends StatelessWidget {
-  const _LeftSide();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children:  [
-        SizedBox(height: AppDimensions.sp4),
-        UserInfoTile(),
-        SizedBox(height: AppDimensions.sp4),
-        StatsSection(),
-        SizedBox(height: AppDimensions.sp4),
-        PostsSection(),
-      ],
     );
   }
 }
