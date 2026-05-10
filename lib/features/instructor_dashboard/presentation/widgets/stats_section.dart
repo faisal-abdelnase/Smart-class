@@ -14,7 +14,7 @@ class StatsSection extends StatelessWidget {
         StatCard(title: "Total Students", value: "148", isCardStudent: true,),
         StatCard(title: "Active Groups", value: "4"),
         StatCard(title: "Exams Pending", value: "3"),
-        StatCard(title: "Avg Score", value: "82%"),
+        StatCard(title: "Pending Join Requests", value: "4"),
       ],
     );
   }

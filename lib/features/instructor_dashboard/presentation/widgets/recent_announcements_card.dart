@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/responsive/responsive_text.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -28,11 +29,8 @@ class RecentAnnouncementsCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Recent Announcements",
-                style: AppTypography.h1.copyWith(color: AppColors.lightText1),
-              ),
 
+              AppText("Recent Announcements", baseFontSize: 20 , style: AppTypography.h1.copyWith(color: AppColors.lightText1)),
               // POST BUTTON
               CustomElevatedButton(text: "+ Post", onPressed: () {}),
             ],
@@ -41,10 +39,10 @@ class RecentAnnouncementsCard extends StatelessWidget {
           const SizedBox(height: 28),
 
           const AnnouncementTile(
-            dotColor: Color(0xff2952FF),
+            dotColor: AppColors.primary,
             tag: "MATH 10A",
-            tagColor: Color(0xffEEF2FF),
-            tagTextColor: Color(0xff2952FF),
+            tagColor: AppColors.primary50,
+            tagTextColor: AppColors.primary,
             time: "Today, 9:30 AM",
             title: "Midterm Exam — Chapter 5 & 6",
             description:
@@ -57,10 +55,10 @@ class RecentAnnouncementsCard extends StatelessWidget {
           const Divider(height: 40),
 
           const AnnouncementTile(
-            dotColor: Color(0xff22C55E),
+            dotColor: AppColors.green,
             tag: "SCIENCE 9B",
-            tagColor: Color(0xffECFDF3),
-            tagTextColor: Color(0xff16A34A),
+            tagColor: AppColors.green50,
+            tagTextColor: AppColors.green,
             time: "Yesterday, 2:15 PM",
             title: "Lab Report Submission — Due Friday",
             description:
@@ -73,10 +71,10 @@ class RecentAnnouncementsCard extends StatelessWidget {
           const Divider(height: 40),
 
           const AnnouncementTile(
-            dotColor: Color(0xffF97316),
+            dotColor: AppColors.accent,
             tag: "ALL GROUPS",
-            tagColor: Color(0xffFFF7ED),
-            tagTextColor: Color(0xffEA580C),
+            tagColor: AppColors.accent50,
+            tagTextColor: AppColors.accent,
             time: "Mar 6, 11:00 AM",
             title: "Parent–Teacher Meeting — March 15",
             description:

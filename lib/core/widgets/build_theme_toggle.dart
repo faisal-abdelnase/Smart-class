@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/theme/app_theme_extensions.dart';
-import '../../../../core/theme/theme_cubit.dart';
+import '../theme/app_theme_extensions.dart';
+import '../theme/theme_cubit.dart';
 
 Widget buildThemeToggle(AppThemeColors t, BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;

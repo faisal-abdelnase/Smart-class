@@ -1,9 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/responsive/responsive_text.dart';
 import 'package:smart_class/core/theme/app_colors.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
 
-import 'post_action_button.dart';
+import 'action_button.dart';
 
 class AnnouncementTile extends StatelessWidget {
   final Color dotColor;
@@ -35,19 +36,7 @@ class AnnouncementTile extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // DOT
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: Container(
-            width: 10,
-            height: 10,
-            decoration: BoxDecoration(
-              color: dotColor,
-              shape: BoxShape.circle,
-            ),
-          ),
-        ),
-
+      
         const SizedBox(width: 18),
 
         // CONTENT
@@ -92,24 +81,16 @@ class AnnouncementTile extends StatelessWidget {
               const SizedBox(height: 14),
 
               // TITLE
-              Text(
-                title,
-                style: AppTypography.h1.copyWith(
-                  color: AppColors.lightText1,
-                  
-                ),
-              ),
+
+              AppText(title, baseFontSize: 18, style: AppTypography.h1.copyWith(color: AppColors.lightText1)),
 
               const SizedBox(height: 10),
 
               // DESCRIPTION
-              Text(
-                description,
-                style: AppTypography.h3.copyWith(
-                  color: AppColors.lightText2,
-                  fontWeight: FontWeight.w300
-                ),
-              ),
+              AppText(description, baseFontSize: 16, style: AppTypography.h3.copyWith(
+                color: AppColors.lightText2,
+                fontWeight: FontWeight.w300
+              )),
 
               const SizedBox(height: 20),
 
