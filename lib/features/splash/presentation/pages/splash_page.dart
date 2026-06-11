@@ -79,7 +79,7 @@ class _SplashPageState extends State<SplashPage>
           final user = UserModel.fromJson(userMap, currentUser.uid);
           if (!mounted) return;
           context.pushReplacementNamed(
-            user.isProfileComplete ? Routes.homePage : Routes.profileCompletionPage,
+            user.isProfileComplete ? Routes.instructorDashboard : Routes.profileCompletionPage,
             arguments: user.isProfileComplete ? null : user,
           );
         } catch (_) {

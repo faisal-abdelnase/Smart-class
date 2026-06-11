@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/responsive/responsive_text.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
@@ -30,9 +31,9 @@ class RecentAnnouncementsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
 
-              AppText("Recent Announcements", baseFontSize: 20 , style: AppTypography.h1.copyWith(color: AppColors.lightText1)),
+              AppText(context.tr("recent_announcements"), baseFontSize: 20 , style: AppTypography.h1.copyWith(color: AppColors.lightText1)),
               // POST BUTTON
-              CustomElevatedButton(text: "+ Post", onPressed: () {}),
+              CustomElevatedButton(text: "+ ${context.tr("post")}", onPressed: () {}),
             ],
           ),
 

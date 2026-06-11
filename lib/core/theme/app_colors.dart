@@ -80,6 +80,12 @@ class AppColors {
     colors: [primaryDark, primary, primaryLight],
   );
 
+  static const LinearGradient gradientPrimary2 = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [ primary, primaryDark],
+  );
+
   static const LinearGradient gradientAccent = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

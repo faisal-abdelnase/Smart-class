@@ -12,5 +12,6 @@ class Routes {
   static const String studentFormPage = '/studentFormPage';
   static const String instructorFormPage = '/instructorFormPage';
   static const String parentFormPage = '/parentFormPage';
-  static const String homePage = '/homePage';
+  static const String instructorDashboard = '/instructorDashboard';
+  static const String searchPage = '/searchPage';
 }

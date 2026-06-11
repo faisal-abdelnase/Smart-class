@@ -1,4 +1,4 @@
-{
+﻿{
   "app_name": "Smart Class",
   "login": "Login",
   "welcome": "Welcome",
@@ -150,5 +150,21 @@
   "no_grade": "No grade",
   "profile_completed_successfully": "Profile completed successfully",
   "unable_to_save_profile": "Unable to save profile right now",
-  "instructor_verification_note": "Instructor Verification\nYou'll be asked to provide credentials in step 3."
+  "instructor_verification_note": "Instructor Verification\nYou'll be asked to provide credentials in step 3.",
+  "total_students" : "Total Students",
+  "active_groups" : "Active Groups",
+  "exams_pending": "Exams Pending",
+  "pending_join_requests": "Pending Join Requests",
+  "student_performance_overview": "Student Performance Overview",
+  "average_grade": "Average Grade",
+  "top_student": "Top Student",
+  "weak_student": "Weak Student",
+  "weekly_grades_performance": "Weekly Grades Performance",
+  "recent_announcements": "Recent Announcements",
+  "post": "Post",
+  "likes": "Likes",
+  "comments": "Comments",
+  "share": "Share",
+  "upcoming_schedule": "Upcoming Schedule",
+  "leaderboard": "Leaderboard"
 }

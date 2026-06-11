@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 
 import 'dashboard_card.dart';
 import 'miniStat_card.dart';
@@ -10,7 +11,7 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DashboardCard(
-      title: "Student Performance Overview",
+      title: context.tr("student_performance_overview"),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -19,7 +20,7 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
             children: [
               Expanded(
                 child: MiniStatCard(
-                  title: "Average Grade",
+                  title: context.tr("average_grade"),
                   value: "82%",
                   color: Colors.blue,
                 ),
@@ -29,7 +30,7 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
 
               Expanded(
                 child: MiniStatCard(
-                  title: "Top Student",
+                  title: context.tr("top_student"),
                   value: "Ahmed",
                   color: Colors.green,
                 ),
@@ -39,7 +40,7 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
 
               Expanded(
                 child: MiniStatCard(
-                  title: "Weak Student",
+                  title: context.tr("weak_student"),
                   value: "John",
                   color: Colors.red,
                 ),
@@ -49,8 +50,8 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
 
           const SizedBox(height: 30),
 
-          const Text(
-            "Weekly Grades Performance",
+          Text(
+            context.tr("weekly_grades_performance"),
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 16,
@@ -142,7 +143,7 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
 
                     belowBarData: BarAreaData(
                       show: true,
-                      color: Colors.blue.withOpacity(.12),
+                      color: Colors.blue.withValues(alpha: 0.12),
                     ),
                   ),
                 ],

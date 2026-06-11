@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_class/features/search/presentation/pages/search_page.dart';
 import '../../core/di/service_locator.dart';
 import '../../features/auth/data/models/user_model.dart';
 import '../../features/auth/domain/entiyies/user_role.dart';
@@ -9,7 +10,7 @@ import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/register_page.dart';
 import '../../features/auth/presentation/pages/role_selection_page.dart';
 import '../../features/auth/presentation/pages/verify_email_page.dart';
-import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/instructor_dashboard/presentation/pages/instructor_dashboard_page.dart';
 import '../../features/profile_completion/presentation/pages/profile_completion_page.dart';
 import 'routes.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
@@ -108,8 +109,12 @@ class AppRouter {
               ),
             );
 
-          case Routes.homePage:
-            return MaterialPageRoute(builder: (_) => const HomePage());
+          case Routes.instructorDashboard:
+            return MaterialPageRoute(
+              builder: (_) => const InstructorDashboardPage());
+
+          case Routes.searchPage:
+            return MaterialPageRoute(builder: (_) => const SearchPage());
 
       default:
         return null;

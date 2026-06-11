@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage>
 
                   final user = state.user;
                   if (user is UserModel && user.isProfileComplete) {
-                    context.pushReplacementNamed(Routes.homePage);
+                    context.pushReplacementNamed(Routes.instructorDashboard);
                   } else if (user is UserModel) {
                     context.pushReplacementNamed(
                       Routes.profileCompletionPage,

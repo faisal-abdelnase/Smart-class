@@ -10,8 +10,8 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
 import '../../../../core/utils/constants.dart';
 import '../view_models/role_model.dart';
-import 'build_local_lang.dart';
-import 'build_theme_toggle.dart';
+import '../../../../core/widgets/build_local_lang.dart';
+import '../../../../core/widgets/build_theme_toggle.dart';
 import 'role_card.dart';
 
 Widget buildDesktop(BuildContext context, AppResponsive r) {

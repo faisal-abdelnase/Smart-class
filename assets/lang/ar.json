@@ -1,4 +1,4 @@
-{
+﻿{
   "app_name": "سمارت كلاس",
   "login": "تسجيل الدخول",
   "welcome": "مرحبا",
@@ -150,5 +150,21 @@
   "no_grade": "بدون صف",
   "profile_completed_successfully": "تم إكمال الملف الشخصي بنجاح",
   "unable_to_save_profile": "تعذر حفظ الملف الشخصي الآن",
-  "instructor_verification_note": "توثيق المدرس\nسيُطلب منك تقديم المستندات في الخطوة الثالثة."
+  "instructor_verification_note": "توثيق المدرس\nسيُطلب منك تقديم المستندات في الخطوة الثالثة.",
+  "total_students" : "إجمالي الطلاب",
+  "active_groups" : "المجموعات النشطة",
+  "exams_pending": "الامتحانات المعلقة",
+  "pending_join_requests": "طلبات الانضمام المعلقة",
+  "student_performance_overview": "نظرة عامة على أداء الطلاب",
+  "average_grade": "المعدل التراكمي",
+  "top_student": "الطالب المتفوق",
+  "weak_student": "طالب ضعيف",
+  "weekly_grades_performance": "الأداء الدراسي الأسبوعي",
+  "recent_announcements": "الإعلانات الأخيرة",
+  "post": "نشر",
+  "likes": "الإعجابات",
+  "comments": "التعليقات",
+  "share": "مشاركة",
+  "upcoming_schedule": "الجدول القادم",
+  "leaderboard": "لوحة المتصدرين"
 }

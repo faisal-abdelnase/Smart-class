@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/theme/app_theme_extensions.dart';
-import 'package:smart_class/features/auth/presentation/widgets/app_bar_rich_text.dart';
-import 'package:smart_class/features/auth/presentation/widgets/build_local_lang.dart';
-import 'package:smart_class/features/auth/presentation/widgets/build_theme_toggle.dart';
+import 'package:smart_class/core/widgets/app_bar_rich_text.dart';
+import 'package:smart_class/core/widgets/build_local_lang.dart';
+import 'package:smart_class/core/widgets/build_theme_toggle.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/bottom_bar.dart';
 import 'package:smart_class/features/profile_completion/presentation/widgets/progress_bar.dart';
 

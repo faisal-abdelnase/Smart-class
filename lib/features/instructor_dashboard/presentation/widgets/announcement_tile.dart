@@ -4,6 +4,7 @@ import 'package:smart_class/core/responsive/responsive_text.dart';
 import 'package:smart_class/core/theme/app_colors.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
 
+import '../../../../core/utils/extensions.dart';
 import 'action_button.dart';
 
 class AnnouncementTile extends StatelessWidget {
@@ -99,7 +100,7 @@ class AnnouncementTile extends StatelessWidget {
                 children: [
                   ActionButton(
                     icon: Icons.favorite_border,
-                    label: "$likes Likes",
+                    label: "$likes ${context.tr("likes")}",
                     onTap: () {},
                   ),
 
@@ -107,7 +108,7 @@ class AnnouncementTile extends StatelessWidget {
 
                   ActionButton(
                     icon: Icons.mode_comment_outlined,
-                    label: "$comments Comments",
+                    label: "$comments ${context.tr("comments")}",
                     onTap: () {},
                   ),
 
@@ -115,7 +116,7 @@ class AnnouncementTile extends StatelessWidget {
 
                   ActionButton(
                     icon: Icons.share_outlined,
-                    label: "Share",
+                    label: context.tr("share"),
                     onTap: () {},
                   ),
                 ],

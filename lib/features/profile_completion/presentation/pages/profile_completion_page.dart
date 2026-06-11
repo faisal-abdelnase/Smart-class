@@ -70,7 +70,7 @@ class _ProfileCompletionPageState extends State<ProfileCompletionPage> {
       );
       if (!mounted) return;
       showSuccessSnackBar(context, context.tr('profile_completed_successfully'));
-      context.pushReplacementNamed(Routes.homePage);
+      context.pushReplacementNamed(Routes.instructorDashboard);
     } catch (_) {
       if (!mounted) return;
       showErrorSnackBar(context, context.tr('unable_to_save_profile'));

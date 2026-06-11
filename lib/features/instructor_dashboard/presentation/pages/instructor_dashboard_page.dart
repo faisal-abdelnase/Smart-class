@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:smart_class/features/instructor_dashboard/presentation/widgets/dashboard_app_bar.dart';
-
 import '../../../../core/responsive/adaptive_scaffold.dart';
-import 'dashboard_body.dart';
+import '../../../../core/widgets/dashboard_app_bar.dart';
+import '../widgets/dashboard_body.dart';
 
 
-class DashboardTablet extends StatefulWidget {
-  const DashboardTablet({super.key});
+class InstructorDashboardPage extends StatefulWidget {
+  const InstructorDashboardPage({super.key});
 
   @override
-  State<DashboardTablet> createState() => _DashboardTabletState();
+  State<InstructorDashboardPage> createState() => _InstructorDashboardPageState();
 }
 
-class _DashboardTabletState extends State<DashboardTablet> {
+class _InstructorDashboardPageState extends State<InstructorDashboardPage> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
-    return AdaptiveScaffold(
+      return AdaptiveScaffold(
       selectedIndex: index,
       onDestinationSelected: (i) => setState(() => index = i),
       roleColor: Colors.blue,

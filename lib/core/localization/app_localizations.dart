@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../features/auth/domain/entiyies/user_role.dart' show UserRole;
+import '../utils/extensions.dart';
+
 class AppLocalizations {
   final Locale locale;
   AppLocalizations(this.locale);
@@ -36,4 +39,16 @@ class AppLocalizations {
 
     return value;
   }
+
+
+  static String getLocalizedUserRole(BuildContext context, UserRole role) {
+  switch (role) {
+    case UserRole.instructor:
+      return context.tr('instructor_role');
+    case UserRole.student:
+      return context.tr('student_role');
+    case UserRole.parent:
+      return context.tr('parent_role');
+  }
+}
 }

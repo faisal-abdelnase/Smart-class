@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 
 import 'dashboard_card.dart';
 import 'leader_board_tile.dart';
@@ -9,7 +10,7 @@ class LeaderboardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DashboardCard(
-      title: "Leaderboard",
+      title: context.tr("leaderboard"),
       child: Column(
         children: const [
           LeaderboardTile(

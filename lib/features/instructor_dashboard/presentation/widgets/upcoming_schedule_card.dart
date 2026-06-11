@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/extensions.dart';
 import 'dashboard_card.dart';
 import 'schedule_tile.dart';
 
@@ -9,7 +10,7 @@ class UpcomingScheduleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DashboardCard(
-      title: "Upcoming Schedule",
+      title: context.tr("upcoming_schedule"),
       child: Column(
         children: const [
           ScheduleTile(
