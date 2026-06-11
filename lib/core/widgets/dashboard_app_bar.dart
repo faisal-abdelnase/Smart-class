@@ -4,9 +4,12 @@ import 'package:smart_class/core/routing/routes.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
 import 'package:smart_class/core/utils/extensions.dart';
 import 'package:smart_class/core/widgets/app_bar_rich_text.dart';
+import 'package:smart_class/core/widgets/build_local_lang.dart';
 
 import '../../features/search/presentation/widgets/search_text_field.dart';
 import '../theme/app_colors.dart';
+import '../theme/app_theme_extensions.dart';
+import 'build_theme_toggle.dart';
 
 class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   const DashboardAppBar({super.key});
@@ -14,10 +17,14 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final r = AppResponsive.of(context);
+    final t = Theme.of(context).extension<AppThemeColors>()!;
     return AppBar(
       automaticallyImplyLeading: false,
       title: AppBarRichText(),
       actions: [
+
+        buildThemeToggle(t,context),
+        buildLocalLang(context),
 
         if(r.isMobile || r.isTablet)
             IconButton(

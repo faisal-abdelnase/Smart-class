@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/theme/app_text_styles.dart';
 import '../../data/models/suggested_group_model.dart';
 import 'group_card.dart';
 
@@ -49,7 +47,7 @@ class GroupsSection extends StatelessWidget {
     
         itemCount: groups.length,
     
-        separatorBuilder: (_, __) =>
+        separatorBuilder: (_, _) =>
             const SizedBox(width: 18),
     
         itemBuilder: (context, index) {
