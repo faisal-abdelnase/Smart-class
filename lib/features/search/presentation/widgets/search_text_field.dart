@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_class/core/theme/app_colors.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
+import 'package:smart_class/core/theme/app_theme_extensions.dart';
 
 class SearchTextField extends StatelessWidget {
   const SearchTextField({
@@ -17,6 +17,10 @@ class SearchTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final t = theme.extension<AppThemeColors>()!;
+    final cs = theme.colorScheme;
+
     return SizedBox(
       width: width,
 
@@ -31,7 +35,7 @@ class SearchTextField extends StatelessWidget {
 
           hintStyle:
               AppTypography.bodyMedium.copyWith(
-            color: AppColors.lightText3,
+            color: t.text3,
           ),
 
           prefixIcon: Padding(
@@ -42,7 +46,7 @@ class SearchTextField extends StatelessWidget {
 
             child: Icon(
               Icons.search_rounded,
-              color: AppColors.primary,
+              color: cs.primary,
               size: 22,
             ),
           ),
@@ -52,7 +56,7 @@ class SearchTextField extends StatelessWidget {
             minWidth: 50,
           ),
           filled: true,
-          fillColor: AppColors.primary50,
+          fillColor: t.primaryTint,
 
           contentPadding:
               const EdgeInsets.symmetric(
@@ -73,8 +77,7 @@ class SearchTextField extends StatelessWidget {
                 BorderRadius.circular(18),
 
             borderSide: BorderSide(
-              color: AppColors.primary
-                  .withValues(alpha: 0.08),
+              color: cs.primary.withOpacity(0.08),
             ),
           ),
 
@@ -83,7 +86,7 @@ class SearchTextField extends StatelessWidget {
                 BorderRadius.circular(18),
 
             borderSide: BorderSide(
-              color: AppColors.primary,
+              color: cs.primary,
               width: 1.4,
             ),
           ),

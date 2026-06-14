@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({required this.theme, super.key});
@@ -29,7 +30,7 @@ class HeaderSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Learning groups',
+                context.tr('learning_groups'),
                 style: theme.textTheme.headlineMedium?.copyWith(
                   color: colorScheme.onPrimaryContainer,
                   fontWeight: FontWeight.w800,
@@ -37,7 +38,7 @@ class HeaderSection extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Organize students into focused spaces for lessons, projects, and progress tracking.',
+                context.tr('learning_groups_description'),
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: colorScheme.onPrimaryContainer.withValues(alpha: 0.78),
                   height: 1.45,

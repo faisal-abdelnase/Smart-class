@@ -167,4 +167,23 @@
   "share": "Share",
   "upcoming_schedule": "Upcoming Schedule",
   "leaderboard": "Leaderboard"
+  ,
+  "recent_search": "Recent Search",
+  "suggested_users": "Suggested Users",
+  "suggested_groups": "Suggested Groups",
+  "search_hint": "Search for courses, instructors, groups...",
+  "all": "All",
+  "users": "Users",
+  "groups_label": "Groups",
+  "exams": "Exams",
+  "follow": "Follow",
+  "following": "Following",
+  "join_group": "Join Group",
+  "joined": "Joined"
+  ,
+  "my_groups": "My Groups",
+  "create_group": "Create Group",
+  "learning_groups": "Learning groups",
+  "learning_groups_description": "Organize students into focused spaces for lessons, projects, and progress tracking.",
+  "view_group": "View Group"
 }

@@ -3,8 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_class/features/search/data/models/user_suggested_model.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_theme_extensions.dart';
+import '../../../../core/utils/extensions.dart';
 import 'image_shimmer.dart';
 
 class SuggestedUserCard extends StatefulWidget {
@@ -28,6 +29,9 @@ class _SuggestedUserCardState
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final t = theme.extension<AppThemeColors>()!;
+    final cs = theme.colorScheme;
 
     return MouseRegion(
 
@@ -54,21 +58,17 @@ class _SuggestedUserCardState
         padding: const EdgeInsets.all(16),
 
         decoration: BoxDecoration(
-          color: AppColors.lightSurface,
+          color: t.surface,
 
           borderRadius: BorderRadius.circular(24),
 
           border: Border.all(
-            color: isHovered
-                ? AppColors.primary
-                : AppColors.lightBorder,
+            color: isHovered ? cs.primary : t.border,
           ),
 
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(
-                alpha: isHovered ? .08 : .04,
-              ),
+              color: Colors.black.withOpacity(isHovered ? .08 : .04),
               blurRadius: isHovered ? 18 : 10,
               offset: const Offset(0, 6),
             ),
@@ -110,6 +110,7 @@ class _SuggestedUserCardState
 
               style: AppTypography.h5.copyWith(
                 fontWeight: FontWeight.bold,
+                color: t.text1,
               ),
             ),
 
@@ -122,7 +123,7 @@ class _SuggestedUserCardState
               overflow: TextOverflow.ellipsis,
 
               style: AppTypography.bodyMedium.copyWith(
-                color: AppColors.lightText2,
+                color: t.text2,
               ),
             ),
 
@@ -142,17 +143,12 @@ class _SuggestedUserCardState
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
 
-                  backgroundColor: isFollowing
-                      ? AppColors.primary50
-                      : AppColors.primary,
+                  backgroundColor: isFollowing ? t.primaryTint : cs.primary,
 
-                  foregroundColor: isFollowing
-                      ? AppColors.primary
-                      : Colors.white,
+                  foregroundColor: isFollowing ? cs.primary : cs.onPrimary,
 
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(14),
                   ),
 
                   padding: const EdgeInsets.symmetric(
@@ -161,9 +157,7 @@ class _SuggestedUserCardState
                 ),
 
                 child: Text(
-                  isFollowing
-                      ? 'Following'
-                      : 'Follow',
+                  isFollowing ? context.tr("following") : context.tr("follow"),
                 ),
               ),
             ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/responsive/responsive_text.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_theme_extensions.dart';
 
 class DashboardCard extends StatelessWidget {
   final String title;
@@ -15,21 +15,23 @@ class DashboardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Theme.of(context).extension<AppThemeColors>()!;
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: t.surface,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(0xffE5E7EB),
+          color: t.border,
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          AppText(title, baseFontSize: 20 , style: AppTypography.h1.copyWith(color: AppColors.lightText1)),
+          AppText(title, baseFontSize: 20 , style: AppTypography.h1.copyWith(color: t.text1)),
           
 
           const SizedBox(height: 22),

@@ -3,8 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_class/features/search/data/models/suggested_group_model.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/app_theme_extensions.dart';
+import '../../../../core/utils/extensions.dart';
 import 'image_shimmer.dart';
 
 class GroupCard extends StatefulWidget {
@@ -27,6 +28,9 @@ class _GroupCardState extends State<GroupCard> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final t = theme.extension<AppThemeColors>()!;
+    final cs = theme.colorScheme;
 
     return MouseRegion(
 
@@ -49,21 +53,17 @@ class _GroupCardState extends State<GroupCard> {
         width: 260,
 
         decoration: BoxDecoration(
-          color: AppColors.lightSurface,
+          color: t.surface,
 
           borderRadius: BorderRadius.circular(24),
 
           border: Border.all(
-            color: isHovered
-                ? AppColors.primary
-                : AppColors.lightBorder,
+            color: isHovered ? cs.primary : t.border,
           ),
 
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(
-                alpha: isHovered ? 0.08 : 0.04,
-              ),
+              color: Colors.black.withOpacity(isHovered ? 0.08 : 0.04),
               blurRadius: isHovered ? 20 : 10,
               offset: const Offset(0, 6),
             ),
@@ -132,10 +132,10 @@ class _GroupCardState extends State<GroupCard> {
                   Row(
                     children: [
 
-                      const Icon(
+                      Icon(
                         Icons.people_alt_outlined,
                         size: 18,
-                        color: Colors.grey,
+                        color: t.text3,
                       ),
 
                       const SizedBox(width: 6),
@@ -143,11 +143,8 @@ class _GroupCardState extends State<GroupCard> {
                       Text(
                         widget.group.membersCount,
 
-                        style:
-                            AppTypography.bodyMedium
-                                .copyWith(
-                          color:
-                              AppColors.lightText2,
+                        style: AppTypography.bodyMedium.copyWith(
+                          color: t.text2,
                         ),
                       ),
                     ],
@@ -163,23 +160,16 @@ class _GroupCardState extends State<GroupCard> {
                     ),
 
                     decoration: BoxDecoration(
-                      color: AppColors.primary50,
-                      borderRadius:
-                          BorderRadius.circular(
-                        10,
-                      ),
+                      color: t.primaryTint,
+                      borderRadius: BorderRadius.circular(10),
                     ),
 
                     child: Text(
                       widget.group.category,
 
-                      style:
-                          AppTypography.bodySmall
-                              .copyWith(
-                        color:
-                            AppColors.primary,
-                        fontWeight:
-                            FontWeight.w600,
+                      style: AppTypography.bodySmall.copyWith(
+                        color: cs.primary,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -197,38 +187,24 @@ class _GroupCardState extends State<GroupCard> {
                         });
                       },
 
-                      style:
-                          ElevatedButton.styleFrom(
+                        style: ElevatedButton.styleFrom(
                         elevation: 0,
 
-                        backgroundColor:
-                            isJoined
-                                ? AppColors.primary50
-                                : AppColors.primary,
+                        backgroundColor: isJoined ? t.primaryTint : cs.primary,
 
-                        foregroundColor:
-                            isJoined
-                                ? AppColors.primary
-                                : Colors.white,
+                        foregroundColor: isJoined ? cs.primary : cs.onPrimary,
 
-                        padding:
-                            const EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 14,
                         ),
 
-                        shape:
-                            RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(
-                            14,
-                          ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
                         ),
                       ),
 
                       child: Text(
-                        isJoined
-                            ? 'Joined'
-                            : 'Join Group',
+                        isJoined ? context.tr("joined") : context.tr("join_group"),
                       ),
                     ),
                   ),

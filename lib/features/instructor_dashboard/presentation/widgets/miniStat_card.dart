@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/theme/app_theme_extensions.dart';
 
 class MiniStatCard extends StatelessWidget {
   final String title;
@@ -13,10 +15,14 @@ class MiniStatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final t = theme.extension<AppThemeColors>()!;
+    final backgroundOpacity = theme.brightness == Brightness.dark ? 0.16 : 0.08;
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(.08),
+        color: color.withOpacity(backgroundOpacity),
         borderRadius: BorderRadius.circular(18),
       ),
       child: Column(
@@ -24,7 +30,7 @@ class MiniStatCard extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: Colors.grey.shade700,
+              color: t.text2,
               fontSize: 13,
             ),
           ),

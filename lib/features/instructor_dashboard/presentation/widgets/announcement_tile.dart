@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_class/core/responsive/responsive_text.dart';
 import 'package:smart_class/core/theme/app_colors.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
+import 'package:smart_class/core/theme/app_theme_extensions.dart';
 
 import '../../../../core/utils/extensions.dart';
 import 'action_button.dart';
@@ -34,6 +35,8 @@ class AnnouncementTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Theme.of(context).extension<AppThemeColors>()!;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -72,7 +75,7 @@ class AnnouncementTile extends StatelessWidget {
                   Text(
                     time,
                     style: AppTypography.labelMedium.copyWith(
-                      color: AppColors.lightText3,
+                      color: t.text3,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -83,13 +86,13 @@ class AnnouncementTile extends StatelessWidget {
 
               // TITLE
 
-              AppText(title, baseFontSize: 18, style: AppTypography.h1.copyWith(color: AppColors.lightText1)),
+              AppText(title, baseFontSize: 18, style: AppTypography.h1.copyWith(color: t.text1)),
 
               const SizedBox(height: 10),
 
               // DESCRIPTION
               AppText(description, baseFontSize: 16, style: AppTypography.h3.copyWith(
-                color: AppColors.lightText2,
+                color: t.text2,
                 fontWeight: FontWeight.w300
               )),
 

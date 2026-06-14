@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_class/core/responsive/app_responsive.dart';
 import 'package:smart_class/core/widgets/custom_elevated_button.dart';
 import 'package:smart_class/features/search/presentation/widgets/search_text_field.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 import '../../data/models/group_model.dart';
 import '../widgets/group_card.dart';
 import '../widgets/header_section.dart';
@@ -43,12 +44,12 @@ class GroupsPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
-        title: const Text("My Groups"),
+        title: Text(context.tr("my_groups")),
         centerTitle: false,
         actions: <Widget>[
           Padding(
             padding: EdgeInsetsDirectional.only(end: 16),
-            child: CustomElevatedButton(text: "+ Create Group", onPressed: (){}),
+            child: CustomElevatedButton(text: "+ ${context.tr("create_group")}", onPressed: (){}),
           ),
         ],
       ),
@@ -73,7 +74,7 @@ class GroupsPage extends StatelessWidget {
                 horizontalPadding,
                 0,
               ),
-              sliver: const SliverToBoxAdapter(child: SearchTextField()),
+              sliver: SliverToBoxAdapter(child: SearchTextField(hintText: context.tr("search_hint"))),
             ),
             SliverPadding(
               padding: EdgeInsets.fromLTRB(

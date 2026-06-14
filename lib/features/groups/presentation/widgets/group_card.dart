@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/utils/extensions.dart';
 
 import '../../data/models/group_model.dart';
 import 'group_color_badge.dart';
@@ -66,7 +67,7 @@ class GroupCard extends StatelessWidget {
                 width: double.infinity,
                 child: FilledButton(
                   onPressed: () {},
-                  child: const Text('View Group'),
+                  child: Text(context.tr('view_group')),
                 ),
               ),
             ],

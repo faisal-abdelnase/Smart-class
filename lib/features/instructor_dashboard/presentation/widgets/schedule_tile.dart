@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/theme/app_theme_extensions.dart';
+import 'package:smart_class/core/theme/app_text_styles.dart';
 
 class ScheduleTile extends StatelessWidget {
   final String subject;
@@ -16,10 +18,12 @@ class ScheduleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Theme.of(context).extension<AppThemeColors>()!;
+
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: t.bgAlt,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -50,16 +54,13 @@ class ScheduleTile extends StatelessWidget {
               children: [
                 Text(
                   subject,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 15,
-                  ),
+                  style: AppTypography.h4.copyWith(color: t.text1),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   type,
                   style: TextStyle(
-                    color: Colors.grey.shade600,
+                    color: t.text2,
                   ),
                 ),
               ],

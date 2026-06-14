@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/responsive/responsive_text.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
 import 'package:smart_class/core/utils/extensions.dart';
+import 'package:smart_class/core/theme/app_theme_extensions.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
@@ -14,13 +13,15 @@ class RecentAnnouncementsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Theme.of(context).extension<AppThemeColors>()!;
+
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: t.surface,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(0xffE5E7EB),
+          color: t.border,
         ),
       ),
       child: Column(
@@ -30,8 +31,11 @@ class RecentAnnouncementsCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
-              AppText(context.tr("recent_announcements"), baseFontSize: 20 , style: AppTypography.h1.copyWith(color: AppColors.lightText1)),
+              AppText(
+                context.tr("recent_announcements"),
+                baseFontSize: 20,
+                style: AppTypography.h1.copyWith(color: t.text1),
+              ),
               // POST BUTTON
               CustomElevatedButton(text: "+ ${context.tr("post")}", onPressed: () {}),
             ],
@@ -48,12 +52,11 @@ class RecentAnnouncementsCard extends StatelessWidget {
             title: "Midterm Exam — Chapter 5 & 6",
             description:
                 "The midterm will cover trigonometry and quadratic equations. Please review the practice sheets.",
-
             likes: 124,
             comments: 32,
           ),
 
-          const Divider(height: 40),
+          Divider(height: 40, color: t.divider),
 
           const AnnouncementTile(
             dotColor: AppColors.green,
@@ -64,12 +67,11 @@ class RecentAnnouncementsCard extends StatelessWidget {
             title: "Lab Report Submission — Due Friday",
             description:
                 "Please submit your completed lab reports through the portal by 11:59 PM.",
-
             likes: 88,
             comments: 14,
           ),
 
-          const Divider(height: 40),
+          Divider(height: 40, color: t.divider),
 
           const AnnouncementTile(
             dotColor: AppColors.accent,
@@ -80,7 +82,6 @@ class RecentAnnouncementsCard extends StatelessWidget {
             title: "Parent–Teacher Meeting — March 15",
             description:
                 "Online meeting scheduled. Parents will receive calendar invites shortly.",
-
             likes: 56,
             comments: 9,
           ),
@@ -89,4 +90,3 @@ class RecentAnnouncementsCard extends StatelessWidget {
     );
   }
 }
-

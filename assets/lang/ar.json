@@ -167,4 +167,23 @@
   "share": "مشاركة",
   "upcoming_schedule": "الجدول القادم",
   "leaderboard": "لوحة المتصدرين"
+  ,
+  "recent_search": "عمليات البحث الأخيرة",
+  "suggested_users": "المستخدمون المقترحون",
+  "suggested_groups": "المجموعات المقترحة",
+  "search_hint": "ابحث عن دورات، مدرسين، مجموعات...",
+  "all": "الكل",
+  "users": "المستخدمون",
+  "groups_label": "المجموعات",
+  "exams": "الامتحانات",
+  "follow": "متابعة",
+  "following": "متابع",
+  "join_group": "انضم للمجموعة",
+  "joined": "منضم"
+  ,
+  "my_groups": "مجموعاتي",
+  "create_group": "إنشاء مجموعة",
+  "learning_groups": "مجموعات التعلم",
+  "learning_groups_description": "نظّم الطلاب في مساحات مخصصة للدروس والمشاريع وتتبع التقدم.",
+  "view_group": "عرض المجموعة"
 }

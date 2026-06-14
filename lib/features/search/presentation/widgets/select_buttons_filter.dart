@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/responsive/responsive_text.dart';
+import 'package:smart_class/core/theme/app_theme_extensions.dart';
 
-import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/extensions.dart';
 
 class SelectButtonsFilter extends StatefulWidget {
   const SelectButtonsFilter({super.key});
@@ -14,19 +15,26 @@ class _SelectButtonsFilterState extends State<SelectButtonsFilter> {
 
   int selectedIndex = 0;
 
-  List<String> options = [
-    "All",
-    "Users",
-    "Groups",
-    "Exams",
-  ];
+  List<String> options = [];
 
   @override
   Widget build(BuildContext context) {
+    // localized options
+    final localizedOptions = [
+      context.tr("all"),
+      context.tr("users"),
+      context.tr("groups_label"),
+      context.tr("exams"),
+    ];
+    final optionsToShow = localizedOptions;
+    final theme = Theme.of(context);
+    final t = theme.extension<AppThemeColors>()!;
+    final cs = theme.colorScheme;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
-        options.length,
+        optionsToShow.length,
         (index) {
           final bool isSelected = selectedIndex == index;
 
@@ -38,41 +46,35 @@ class _SelectButtonsFilterState extends State<SelectButtonsFilter> {
                   selectedIndex = index;
                 });
               },
-              child: AnimatedContainer(
+                child: AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 15,
                   vertical: 10,
                 ),
                 decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppColors.primary
-                      : AppColors.lightSurface,
+                  color: isSelected ? cs.primary : t.surface,
                   borderRadius: BorderRadius.circular(25),
                   border: Border.all(
-                    color: isSelected
-                        ? AppColors.primary
-                        : AppColors.lightBorder,
+                    color: isSelected ? cs.primary : t.border,
                   ),
                   boxShadow: [
                     BoxShadow(
                       color: isSelected
-                          ? AppColors.primary.withValues(alpha: 0.25)
-                          : Colors.black.withValues(alpha: 0.03),
+                          ? cs.primary.withOpacity(0.25)
+                          : Colors.black.withOpacity(0.03),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
                   ],
                 ),
                 child: AppText(
-                  options[index],
+                  optionsToShow[index],
                   baseFontSize: 12,
                   style: TextStyle(
                     
                     fontWeight: FontWeight.w600,
-                    color: isSelected
-                        ? Colors.white
-                        : AppColors.lightText1,
+                    color: isSelected ? cs.onPrimary : t.text1,
                   ),
                 ),
               ),

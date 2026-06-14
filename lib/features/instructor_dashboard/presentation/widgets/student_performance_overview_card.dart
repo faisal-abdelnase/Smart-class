@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_class/core/theme/app_theme_extensions.dart';
 import 'package:smart_class/core/utils/extensions.dart';
 
 import 'dashboard_card.dart';
@@ -10,6 +11,10 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final t = theme.extension<AppThemeColors>()!;
+    final primary = theme.colorScheme.primary;
+
     return DashboardCard(
       title: context.tr("student_performance_overview"),
       child: Column(
@@ -55,6 +60,7 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 16,
+              color: t.text1,
             ),
           ),
 
@@ -67,7 +73,12 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
                 gridData: FlGridData(
                   show: true,
                   drawVerticalLine: false,
+                  drawHorizontalLine: true,
                   horizontalInterval: 20,
+                  getDrawingHorizontalLine: (value) => FlLine(
+                    color: t.divider,
+                    strokeWidth: 1,
+                  ),
                 ),
 
                 borderData: FlBorderData(show: false),
@@ -113,7 +124,7 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
                       getTitlesWidget: (value, meta) {
                         return Text(
                           "${value.toInt()}",
-                          style: const TextStyle(fontSize: 11),
+                          style: TextStyle(fontSize: 11, color: t.text2),
                         );
                       },
                     ),
@@ -136,14 +147,14 @@ class StudentPerformanceOverviewCard extends StatelessWidget {
                     ],
 
                     isCurved: true,
-                    color: Colors.blue,
+                    color: primary,
                     barWidth: 4,
 
                     dotData: const FlDotData(show: true),
 
                     belowBarData: BarAreaData(
                       show: true,
-                      color: Colors.blue.withValues(alpha: 0.12),
+                      color: primary.withOpacity(0.12),
                     ),
                   ),
                 ],
