@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/utils/extensions.dart';
-
 import '../../data/models/group_model.dart';
+import '../pages/group_details_page.dart';
 import 'group_color_badge.dart';
 import 'student_count.dart';
 
@@ -15,6 +15,12 @@ class GroupCard extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
+    void openGroupDetails() {
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (_) => GroupDetailsPage(group: group)));
+    }
+
     return Card(
       elevation: 0,
       clipBehavior: Clip.antiAlias,
@@ -24,7 +30,7 @@ class GroupCard extends StatelessWidget {
         side: BorderSide(color: colorScheme.outlineVariant),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: openGroupDetails,
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -66,7 +72,7 @@ class GroupCard extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: openGroupDetails,
                   child: Text(context.tr('view_group')),
                 ),
               ),

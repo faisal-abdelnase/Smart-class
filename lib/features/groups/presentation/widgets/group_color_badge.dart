@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../data/models/group_model.dart';
 
 class GroupColorBadge extends StatelessWidget {

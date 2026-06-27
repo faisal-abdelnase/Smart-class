@@ -1,10 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/responsive/responsive_text.dart';
-import 'package:smart_class/core/theme/app_colors.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
 import 'package:smart_class/core/theme/app_theme_extensions.dart';
-
 import '../../../../core/utils/extensions.dart';
 import 'action_button.dart';
 
