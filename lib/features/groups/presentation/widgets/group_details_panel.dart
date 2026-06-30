@@ -3,6 +3,7 @@ import 'package:smart_class/features/groups/presentation/views/exams_view.dart';
 import 'package:smart_class/features/groups/presentation/views/posts_view.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
 import '../../../../core/utils/extensions.dart';
+import '../views/assignments_view.dart';
 import 'empty_group_tab.dart';
 
 
@@ -46,11 +47,7 @@ class GroupDetailsPanel extends StatelessWidget {
               children: <Widget>[
                 PostsView(compact: compact),
                 GroupExamsView(compact: compact),
-                EmptyGroupTab(
-                  icon: Icons.assignment_outlined,
-                  title: context.tr('assignments'),
-                  message: context.tr('group_assignments_empty'),
-                ),
+                AssignmentsView(compact: compact),
                 EmptyGroupTab(
                   icon: Icons.leaderboard_outlined,
                   title: context.tr('ranking'),
