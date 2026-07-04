@@ -212,5 +212,14 @@
   "tomorrow": "غدًا",
   "group_assignments_empty": "لم تتم إضافة واجبات لهذه المجموعة بعد.",
   "group_ranking_empty": "سيظهر الترتيب بعد أن يبدأ الطلاب في تسليم الأعمال.",
-  "group_members_empty": "ستظهر تفاصيل الأعضاء هنا."
+  "group_members_empty": "ستظهر تفاصيل الأعضاء هنا.",
+  "group_students_title": "طلاب المجموعة",
+  "student_id": "الرقم التعريفي: {id}",
+  "student": "طالب",
+  "average_score": "متوسط الدرجات ",
+  "attendance": "الحضور",
+  "status": "الحالة",
+  "active": "نشط",
+  "at_risk": "في خطر",
+  "struggling": "يواجه صعوبة"
 }

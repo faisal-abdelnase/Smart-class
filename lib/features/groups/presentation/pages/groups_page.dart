@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_class/core/responsive/app_responsive.dart';
 import 'package:smart_class/core/widgets/custom_elevated_button.dart';
-import 'package:smart_class/features/search/presentation/widgets/search_text_field.dart';
+import 'package:smart_class/core/widgets/search_text_field.dart';
 import 'package:smart_class/core/utils/extensions.dart';
 import '../../data/models/group_model.dart';
 import '../widgets/group_card.dart';

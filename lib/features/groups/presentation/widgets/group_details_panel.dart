@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_class/features/groups/presentation/views/exams_view.dart';
 import 'package:smart_class/features/groups/presentation/views/posts_view.dart';
+import 'package:smart_class/features/groups/presentation/views/student_view.dart';
 import '../../../../core/theme/app_theme_extensions.dart';
 import '../../../../core/utils/extensions.dart';
 import '../views/assignments_view.dart';
@@ -53,13 +54,7 @@ class GroupDetailsPanel extends StatelessWidget {
                   title: context.tr('ranking'),
                   message: context.tr('group_ranking_empty'),
                 ),
-                EmptyGroupTab(
-                  icon: Icons.groups_2_outlined,
-                  title: context.tr('members_count_badge', <String, String>{
-                    'count': memberCount.toString(),
-                  }),
-                  message: context.tr('group_members_empty'),
-                ),
+                GroupStudentsView(compact: compact),
               ],
             ),
           ),

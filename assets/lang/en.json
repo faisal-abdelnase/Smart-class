@@ -212,5 +212,14 @@
   "tomorrow": "Tomorrow",
   "group_assignments_empty": "No assignments have been added to this group yet.",
   "group_ranking_empty": "Ranking will appear after students start submitting work.",
-  "group_members_empty": "Member details will appear here."
+  "group_members_empty": "Member details will appear here.",
+  "group_students_title": "Group Students",
+  "student_id": "ID: {id}",
+  "student": "Student",
+  "average_score": "Avg. Score",
+  "attendance": "Attendance",
+  "status": "Status",
+  "active": "Active",
+  "at_risk": "At Risk",
+  "struggling": "Struggling"
 }

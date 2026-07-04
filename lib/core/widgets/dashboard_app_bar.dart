@@ -6,7 +6,7 @@ import 'package:smart_class/core/utils/extensions.dart';
 import 'package:smart_class/core/widgets/app_bar_rich_text.dart';
 import 'package:smart_class/core/widgets/build_local_lang.dart';
 
-import '../../features/search/presentation/widgets/search_text_field.dart';
+import 'search_text_field.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme_extensions.dart';
 import 'build_theme_toggle.dart';

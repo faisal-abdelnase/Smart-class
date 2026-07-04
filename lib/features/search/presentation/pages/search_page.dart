@@ -4,7 +4,7 @@ import 'package:smart_class/core/responsive/responsive_text.dart';
 import 'package:smart_class/core/theme/app_dimension.dart';
 import 'package:smart_class/core/theme/app_text_styles.dart';
 import 'package:smart_class/core/theme/app_theme_extensions.dart';
-import 'package:smart_class/features/search/presentation/widgets/search_text_field.dart';
+import 'package:smart_class/core/widgets/search_text_field.dart';
 import 'package:smart_class/features/search/presentation/widgets/select_buttons_filter.dart';
 import 'package:smart_class/features/search/presentation/widgets/suggested_users_section.dart';
 
