@@ -5,7 +5,8 @@ import 'package:smart_class/features/groups/presentation/views/student_view.dart
 import '../../../../core/theme/app_theme_extensions.dart';
 import '../../../../core/utils/extensions.dart';
 import '../views/assignments_view.dart';
-import 'empty_group_tab.dart';
+import '../views/schedule_view.dart';
+
 
 
 class GroupDetailsPanel extends StatelessWidget {
@@ -38,8 +39,8 @@ class GroupDetailsPanel extends StatelessWidget {
                 Tab(text: context.tr('posts')),
                 Tab(text: context.tr('exams')),
                 Tab(text: context.tr('assignments')),
-                Tab(text: context.tr('ranking')),
-                Tab(text: context.tr('members')),
+                Tab(text: context.tr('Schedule')),
+                Tab(text: context.tr('Students')),
               ],
             ),
           ),
@@ -49,11 +50,7 @@ class GroupDetailsPanel extends StatelessWidget {
                 PostsView(compact: compact),
                 GroupExamsView(compact: compact),
                 AssignmentsView(compact: compact),
-                EmptyGroupTab(
-                  icon: Icons.leaderboard_outlined,
-                  title: context.tr('ranking'),
-                  message: context.tr('group_ranking_empty'),
-                ),
+                ScheduleView(compact: compact),
                 GroupStudentsView(compact: compact),
               ],
             ),

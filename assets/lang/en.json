@@ -216,10 +216,15 @@
   "group_students_title": "Group Students",
   "student_id": "ID: {id}",
   "student": "Student",
+  "Students": "Students",
+  "Schedule": "Schedule",
   "average_score": "Avg. Score",
   "attendance": "Attendance",
   "status": "Status",
   "active": "Active",
   "at_risk": "At Risk",
-  "struggling": "Struggling"
+  "struggling": "Struggling",
+  "today": "Today",
+  "prev_week": "Prev Week",
+  "next_week": "Next Week"
 }

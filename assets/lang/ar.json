@@ -216,10 +216,15 @@
   "group_students_title": "طلاب المجموعة",
   "student_id": "الرقم التعريفي: {id}",
   "student": "طالب",
+  "Students": "طلاب",
+  "Schedule": "الجدول",
   "average_score": "متوسط الدرجات ",
   "attendance": "الحضور",
   "status": "الحالة",
   "active": "نشط",
   "at_risk": "في خطر",
-  "struggling": "يواجه صعوبة"
+  "struggling": "يواجه صعوبة",
+    "today": "اليوم",
+    "prev_week": "الأسبوع السابق",
+    "next_week": "الأسبوع القادم"
 }
